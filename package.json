@@ -8,6 +8,8 @@
     "preview": "astro preview",
     "build": "python3 ../bin/site_tokens.py --theme data/theme.json --out public/theme.css --report reports/theme-report.json && astro build && python3 scripts/site-framework.py --dist dist",
     "test": "node --test tests/*.test.mjs",
+    "quiz:batches": "node scripts/quiz-review-batches.mjs",
+    "quiz:crosscheck": "node scripts/quiz-crosscheck.mjs",
     "gate": "node scripts/gate.mjs",
     "check": "node scripts/validate-rules.mjs && npm run test && npm run build && npm run gate"
   },
