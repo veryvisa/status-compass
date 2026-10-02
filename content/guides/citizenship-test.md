@@ -145,7 +145,7 @@ IRCC 写明：考试 20 题，选择题或判断题，用英语或法语，时�
 
 三次都不过：会被邀请参加由公民官员主持的面谈（听证）。官员可能口头问 20 道类似考试的知识题，答对 15 题才通过；也可能问居住情况，或评估语言能力，最多问 9 题，答对 6 题通过；面谈约 30 至 90 分钟。通过就等宣誓邀请；不通过，申请被拒，要重新申请、重新缴费。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html)
 
-通过之后：可能被邀请面谈，核实身份与文件原件，要带所交复印件的原件和资格期内用过的全部护照；之后是宣誓仪式。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html) 全家一起申请的，一人没过会让全家一起等；想先单独宣誓的，可以写邮件询问能否拆分。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html)
+通过之后：可能被邀请面谈，核实身份与文件原件，要带所交复印件的原件和申请前 5 年内用过的全部护照和旅行证件；之后是宣誓仪式。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html) 全家一起申请的，一人没过会让全家一起等；想先单独宣誓的，可以写邮件询问能否拆分。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html)
 
 ## 最常见的误区
 
