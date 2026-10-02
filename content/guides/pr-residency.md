@@ -25,6 +25,7 @@ related_paths: [new-pr, split-family, pr-shortfall, renounce-pr, pre-pr]
 related_guides: [pr-card-prtd, renounce-pr, citizenship-apply, tax-residency]
 tools: [day-ledger, decision-trees]
 forum: [56609, 56532, 58866]
+forum_tid: 59471
 ---
 
 林女士 2021 年登陆温哥华，之后在上海照顾母亲的时间比在加拿大还长。2026 年 10 月她准备续卡，翻出护照数了三遍，每次得到的数字都不一样：有时 724 天，有时 730 天。差的那几天，恰好就是每趟出境和入境的那一天。这类「差一点」的情况，决定了续卡是一张表还是一场人道理由的陈述。

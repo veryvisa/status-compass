@@ -26,6 +26,7 @@ related_paths: [citizenship-ready, new-pr, pre-pr, split-family, senior-parent]
 related_guides: [citizenship-test, pr-residency, tax-residency, renounce-citizenship]
 tools: [day-ledger, decision-trees]
 forum: [58809, 58296]
+forum_tid: 59474
 ---
 
 刘先生 2019 年来温哥华读研，2021 年拿工签，2023 年 11 月 20 日成为 PR。2026 年初他想递交入籍，朋友说「三年就够」，他从登陆那天数起，发现还差很多；另一位朋友说「学签工签时间也算一半」，他又算出来早就够了。两种说法都只对了一半。

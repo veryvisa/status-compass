@@ -26,6 +26,7 @@ related_paths: [renounce-pr, pr-shortfall, leaving-canada, split-family]
 related_guides: [pr-residency, pr-card-prtd, tax-residency, departure-tax, benefits-residence]
 tools: [day-ledger, decision-trees, tax-residency, departure-tax]
 forum: [56532, 58866, 58716, 56609]
+forum_tid: 59473
 ---
 
 黄先生 2018 年登陆，2020 年初回了杭州，此后只回来过两次，一次 20 天，一次 22 天。现在女儿在多伦多读大学，他和太太每年想去看她一两次。每次入境都担心被问天数，卡也早过期了。他问：干脆放弃 PR，改办访客签证，是不是更省心？

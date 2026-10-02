@@ -26,6 +26,7 @@ related_paths: [new-pr, pr-shortfall, split-family, renounce-pr]
 related_guides: [pr-residency, renounce-pr, citizenship-apply]
 tools: [day-ledger, decision-trees]
 forum: [56609, 56532, 58866]
+forum_tid: 59472
 ---
 
 周先生的枫叶卡 2027 年 3 月底到期。他 2026 年 6 月想趁暑假回国三个月，问题是：现在续，还是回来再续？如果在国内期间卡过期了怎么办？另一位李女士已经在成都住了四年，卡早过期，父亲去世后她想回来，订机票时被告知没有有效证件不能登机。

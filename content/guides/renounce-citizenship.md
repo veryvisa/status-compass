@@ -24,6 +24,7 @@ related_paths: [renounce-citizenship, leaving-canada, senior-parent]
 related_guides: [tax-residency, departure-tax, benefits-residence, citizenship-apply]
 tools: [tax-residency, departure-tax, benefits, decision-trees]
 forum: [58716, 58866, 58462, 55015]
+forum_tid: 59475
 ---
 
 孙先生 2010 年入籍，2026 年春天回上海照顾年迈的父母，打算长住。他想恢复中国国籍、把户口落回去，方便办医保、买房和处理父母的房产。上海的派出所告诉他，要先申请恢复中国国籍；有人又说必须先放弃加拿大国籍。到底谁先谁后？放弃之后，他在加拿大的房子、RRSP 和以后的养老金又会怎样？
