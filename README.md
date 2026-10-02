@@ -11,4 +11,4 @@ npm install
 npm run check
 ```
 
-规则核读、设计取舍、复用关系与上线证据见 `REPORT-build-1001.md`。
+第一版规则核读与设计取舍见 `REPORT-build-1001.md`；家庭文件、规则版本、医保/OAS/CBSA 修正、题库复判准备与第二轮上线证据见 `REPORT-round2-1001.md`。
