@@ -6,7 +6,7 @@
 
 完成数字：`data/rules.json` 共 56 条，其中 verified 54 条、pending 2 条；已知答案样例 22 个，自动测试 27 项（最终数字以 `npm run check` 输出为准）；入籍题库 135 题，来自 45 个 Discover Canada 事实点的三种练习形态；构建后 20 个 HTML 页面。
 
-线上地址：<https://veryvisa.github.io/status-compass/>（首次推送后补实时读回状态）。
+线上地址：<https://veryvisa.github.io/status-compass/>。2026-10-01 17:29（温哥华时间）GitHub Pages 构建完成，首页经独立 HTTP 读回为 200，页面标题为“枫居罗盘”；部署分支提交为 `626c6d0126b972b043339d81720b0e341d169b26`。
 
 ## 与原设计不同的地方
 
@@ -22,7 +22,7 @@
 
 复用关系落在 `data/reuse-map.json`。本站继承移民站的 PR/入籍日历口径与纯前端边界，继承身份页“移民身份不等于税务居民”的事实框架，只读参考 academy 的福利金额层，并沿用跨境图谱的离境税次序。以后应让 `ca-immigration-site` 的 status-clock 在构建时读取本站 verified 子集或直接导流到本站；不要再维护两套天数算法。本轮按任务书没有改移民站代码。
 
-`npm run check` 依次执行规则结构/来源/数量门、Node 已知答案测试、Astro 构建、共享主题与体验层、发布门。发布门拦截页面引用 pending 规则、任何表单外发、客户端网络 API、缺手机 viewport、固定宽度造成的静态横向溢出风险。真实 Chromium 另验了 390px 的首页与六个工具：均无横向滚动；天数计算后没有跨源资源请求。
+`npm run check` 依次执行规则结构/来源/数量门、Node 已知答案测试、Astro 构建、共享主题与体验层、发布门。发布门拦截页面引用 pending 规则、任何表单外发、客户端网络 API、缺手机 viewport、固定宽度造成的静态横向溢出风险。发布前用 Ego Lite 的真实 Chromium 另验了与线上相同的 `dist/`：390px 首页与六个工具均无横向滚动，天数计算后没有跨源资源请求；发布后 HTTP 独立读回为 200。发布后的 Ego Lite 复验真实失败在 `ego_cli bootstrap` 连接层，因此没有把“线上交互复验”冒充为已完成。
 
 ## 我最没把握的三处
 
@@ -64,6 +64,8 @@
 
 ## 回退
 
-源站回退：`git -C /Users/flyabroadca/github/fcgvisa_workspace/status-compass revert <本次提交哈希> && git -C /Users/flyabroadca/github/fcgvisa_workspace/status-compass push origin main`。
+源站回退：`git -C /Users/flyabroadca/github/fcgvisa_workspace/status-compass revert ae5b602 d77cca3 8be3122 && git -C /Users/flyabroadca/github/fcgvisa_workspace/status-compass push origin main`。
 
-门户登记回退：`git -C /Users/flyabroadca/github/fcgvisa_workspace/academy revert <门户提交哈希> && git -C /Users/flyabroadca/github/fcgvisa_workspace/academy push origin main`。
+线上回退：从 GitHub 仓库 `veryvisa/status-compass` 的 `gh-pages` 分支恢复到所需部署提交，再运行 `git -C <部署临时目录> push --force-with-lease origin HEAD:gh-pages`；本版可恢复锚点是 `626c6d0126b972b043339d81720b0e341d169b26`。
+
+门户登记回退：`git -C /Users/flyabroadca/github/fcgvisa_workspace/academy revert 76f76c56`。academy 在本轮开始前已有独立未推提交，因此没有把整条 main 盲推到远端。
