@@ -1,11 +1,14 @@
 import { calculateFamilyLedger, normalizeFamilyFile, serializeFamilyFile } from '../lib/family-ledger.mjs';
 import { parseTripInput } from '../lib/day-ledger.mjs';
+import { parseCbsaColumns } from '../lib/cbsa-import.mjs';
 
 const form = document.querySelector('[data-family-form]');
 if (form) {
   const editors = form.querySelector('[data-members]');
   const results = document.querySelector('[data-family-results]');
   const status = form.querySelector('[data-ledger-status]');
+  const cbsaTarget = form.querySelector('[data-cbsa-target]');
+  const cbsaColumns = form.querySelector('[data-cbsa-columns]');
   let members = [];
   const sample = {
     schemaVersion: 2, asOf: '2026-10-01', members: [
@@ -56,6 +59,9 @@ if (form) {
       members = members.filter((member) => member.id !== id).map((member) => member.spouseId === id ? { ...member, spouseId: undefined } : member);
       renderEditors();
     }));
+    const previousTarget = cbsaTarget.value;
+    cbsaTarget.innerHTML = members.map((member) => `<option value="${escapeHtml(member.id)}">${escapeHtml(member.name)}</option>`).join('');
+    if (members.some((member) => member.id === previousTarget)) cbsaTarget.value = previousTarget;
   }
 
   const read = () => ({ schemaVersion: 2, asOf: form.asOf.value, members: syncFromEditors() });
@@ -91,6 +97,17 @@ if (form) {
     try { const blob = new Blob([JSON.stringify(serializeFamilyFile(read()), null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = members.length > 1 ? 'maple-status-family.json' : 'maple-status-records.json'; a.click(); URL.revokeObjectURL(a.href); } catch (error) { status.textContent = `无法导出：${error.message}`; }
   });
   form.querySelector('[data-import]').addEventListener('change', async (event) => { try { const data = JSON.parse(await event.target.files[0].text()); write(data); render(data); } catch (error) { status.textContent = `无法导入：${error.message}`; } });
+  form.querySelector('[data-cbsa-import]').addEventListener('click', () => {
+    try {
+      syncFromEditors();
+      const parsed = parseCbsaColumns(cbsaColumns.value);
+      const target = members.find((member) => member.id === cbsaTarget.value);
+      if (!target) throw new Error('请先选择家庭成员');
+      target.trips = parsed.trips;
+      renderEditors();
+      status.textContent = `已为 ${target.name} 解析 ${parsed.events.length} 条入出境事件，生成 ${parsed.trips.length} 段行程${parsed.warnings.length ? `；还有 ${parsed.warnings.length} 条未配对入境提示` : ''}。`;
+    } catch (error) { status.textContent = `CBSA 列未导入：${error.message}；原行程保持不变。`; }
+  });
 
   members = [blankMember(0)];
   renderEditors();
