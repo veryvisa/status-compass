@@ -1,0 +1,13 @@
+---
+const { headings = [] } = Astro.props;
+---
+{headings.length > 0 && <>
+  <details class="toc toc-mobile">
+    <summary>本页目录（{headings.length} 节）</summary>
+    <ol>{headings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+  </details>
+  <aside class="toc toc-desktop" aria-label="本页目录">
+    <strong>本页目录</strong>
+    <ol>{headings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+  </aside>
+</>}

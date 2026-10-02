@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import SituationNav from '../../../components/SituationNav.astro';
+import RelatedCards from '../../../components/RelatedCards.astro';
+import PrevNext from '../../../components/PrevNext.astro';
+import { adjacent, sortGuides, sortPaths } from '../../../lib/content.mjs';
+import { renderMarkdown } from '../../../lib/markdown.mjs';
+import { href } from '../../../lib/site.mjs';
+
+export async function getStaticPaths() {
+  return (await getCollection('guides')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const paths = sortPaths(await getCollection('paths'));
+const guides = sortGuides(await getCollection('guides'));
+const { html } = await renderMarkdown(entry.data.site_digest);
+const neighbours = adjacent(guides, entry.data.slug);
+const detailHref = entry.data.forum_tid ? `https://bbs.fcgvisa.com/t/${entry.data.forum_tid}` : href(`guides/${entry.data.slug}/full/`);
+---
+<Base title={entry.data.title} description={entry.data.summary}>
+  <div class="wrap content-page">
+    <SituationNav relatedSlugs={entry.data.related_paths} />
+    <header class="path-hero"><p class="eyebrow">专题摘要 · 更新于 {String(entry.data.updated).slice(0, 10)}</p><h1>{entry.data.title}</h1><p class="lede">{entry.data.summary}</p></header>
+    <article class="prose digest" set:html={html}></article>
+    <p class="detail-action"><a class="button" href={detailHref}>读完整详解 →</a><span>{entry.data.forum_tid ? '论坛保留完整背景、证据与讨论。' : '论坛详解尚未上线，先读站内过渡全文。'}</span></p>
+    <RelatedCards data={entry.data} paths={paths} guides={guides} />
+    <PrevNext {...neighbours} section="guides" />
+  </div>
+</Base>

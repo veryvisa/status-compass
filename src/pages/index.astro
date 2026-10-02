@@ -1,7 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import audiences from '../../data/audiences.json';
+import { sortGuides, sortPaths, tools } from '../lib/content.mjs';
 import { href } from '../lib/site.mjs';
+const paths = sortPaths(await getCollection('paths'));
+const guides = sortGuides(await getCollection('guides'));
 ---
 <Base>
   <div class="wrap">
@@ -10,14 +13,8 @@ import { href } from '../lib/site.mjs';
       <div class="compass-card" aria-label="一份记录，五把尺子"><strong>一份出入境记录<br /><span>五把尺子</span><br />一张未来时间线</strong></div>
     </section>
     <section class="warning"><strong>你的日期不会离开浏览器。</strong> 所有计算都在当前页面本地完成。本站不给“你是或不是税务居民”的个案结论，也不自动把有争议的境外例外算进去。</section>
-    <section class="section" id="situations"><div class="section-head"><div><p class="eyebrow">先认出自己</p><h2>你现在是哪种情况？</h2></div><p>目录让人找知识，处境才能把人带到下一步。</p></div><div class="grid">{audiences.map((item) => <article class="card"><span class="tag">{item.kicker}</span><h3>{item.label}</h3><p>{item.conclusion}</p><a class="stretch" href={href(`paths/${item.slug}/`)}>看我的三步路径 →</a></article>)}</div></section>
-    <section class="section"><div class="section-head"><div><p class="eyebrow">六个本地工具</p><h2>把模糊的问题变成可核对的输入</h2></div></div><div class="grid">
-      <article class="card"><h3>天数总账</h3><p>一份行程同时量 PR、入籍、税务天数、省医保与 OAS。</p><a href={href('tools/day-ledger/')}>开始计算</a></article>
-      <article class="card"><h3>税务居民问卷</h3><p>把重要联系、次要联系、天数与协定冲突拆开。</p><a href={href('tools/tax-residency/')}>整理事实</a></article>
-      <article class="card"><h3>福利影响器</h3><p>离开多久，分别会碰到哪些通知或停止节点。</p><a href={href('tools/benefits/')}>看影响</a></article>
-      <article class="card"><h3>离境税估算</h3><p>先估量级与表格触发信号，再把高风险项目交给专业人士。</p><a href={href('tools/departure-tax/')}>试算资产</a></article>
-      <article class="card"><h3>三棵决策树</h3><p>续卡、PRTD、放弃；入籍或保持 PR；弃籍后的路。</p><a href={href('tools/decision-trees/')}>比较路径</a></article>
-      <article class="card"><h3>入籍考试练习</h3><p>按官方指南分章练习、限时模拟，错题只存在本机。</p><a href={href('citizenship-test/')}>进入题库</a></article>
-    </div></section>
+    <section class="section" id="situations"><div class="section-head"><div><p class="eyebrow">先认出自己</p><h2>你现在是哪种情况？</h2></div><p>每张卡都通向完整路线图，不再停在三句框架。</p></div><div class="grid">{paths.map((entry) => <a class="card" href={href(`paths/${entry.data.slug}/`)}><span class="tag">处境路线</span><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><span class="card-cta">打开完整路径 →</span></a>)}</div></section>
+    <section class="section"><div class="section-head"><div><p class="eyebrow">六个本地工具</p><h2>把模糊问题变成可核对的输入</h2></div><a href={href('tools/')}>查看全部工具 →</a></div><div class="grid">{Object.values(tools).map((tool) => <a class="card" href={href(tool.href)}><span class="tag">工具</span><h3>{tool.label}</h3><p>{tool.summary}</p><span class="card-cta">打开工具 →</span></a>)}</div></section>
+    <section class="section" id="guides"><div class="section-head"><div><p class="eyebrow">网站摘要，论坛详解</p><h2>专题详解</h2></div><p>先在站里看关键数字与适用时机，再进入完整长文。</p></div><div class="grid">{guides.map((entry) => <a class="card" href={href(`guides/${entry.data.slug}/`)}><span class="tag">专题摘要</span><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><span class="card-cta">看摘要与详解入口 →</span></a>)}</div></section>
   </div>
 </Base>

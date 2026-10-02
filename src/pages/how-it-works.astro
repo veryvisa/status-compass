@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import cases from '../../tests/cases.json';
 import familyCases from '../../tests/family-cases.json';
 import { rule } from '../lib/rules.mjs';
+import { href } from '../lib/site.mjs';
 const prDays = rule('pr.required_days');
 const citDays = rule('citizenship.required_days');
 const ohipDays = rule('ohip.presence_days');
@@ -15,6 +16,6 @@ const mspExtended = rule('msp.extended_absence_months');
   <section class="section stack"><h2>共同日历口径</h2><p>所有日期先转成不带时刻的加拿大日历日。离境日与返加日都视为在加拿大；同日往返不扣天。仍在境外时，从离境翌日起扣到计算日。跨时区飞行如造成护照、CBSA 与机票日期不一致，应以申请表要求和官方记录复核。</p><p>标记为“陪同公民”“加拿大企业境外全职”等例外的行程仍先按缺席扣除。只有用户看过证据要求后，才可在正式申请中主张；第一版工具不自动加回。</p></section>
   <section class="section stack"><h2>PR 五年尺</h2><p data-rule={prDays.id}>成为 PR 已满五年者看滚动五年窗口；未满五年者从成为 PR 当日累计，并另看首个五年结束前是否仍可能达到 {prDays.value} 日。枫叶卡到期不等于 PR 身份自动消失，工具也不作丧失身份认定。</p><h2>入籍五年尺</h2><p data-rule={citDays.id}>签署申请日不计入；PR 后实际在加日按整天，资格期内合资格的 PR 前时间按规则折算并受上限约束。达到 {citDays.value} 日仍不等于可递交，还要核报税、语言、考试与禁限情形。</p><h2>税务与 OAS</h2><p>税务尺只报告当年在加天数和 183 日信号；居民身份主要看居所联系与协定。OAS 的天数只是整理线索，通常居住仍要结合完整事实认定。</p><h2>Ontario OHIP：滚动窗口</h2><p data-rule={ohipDays.id}>计算日向前回看一个完整的十二个月，核对是否有 {ohipDays.value} 天在安省，不再错用 1 月 1 日到计算日的日历年累计。对刚开始在安省居住的人，还另核开始日起首 183 天中至少 {ohipInitial.value} 天；官方原文不是“首 212 天中 183 天”。212 天是任意十二个月内在安省以外超过该数时，可能需要重新申请的反向提示。</p><h2>BC MSP：日历年</h2><p data-rule={mspMonths.id}>BC 按每个日历年至少在省内 {mspMonths.value} 个月的口径；月份长度不同，因此结果页显示当年已记录天数，不把六个月冒充成固定 183 天。度假通常允许每个日历年累计离省最多 {mspVacation.value} 个月；临时就业或度假的延长离省须事先向 HIBC 核准，可能最长 {mspExtended.value} 个连续月，不由本工具自动放行。</p></section>
   <section class="section stack"><h2>OAS 只显示天数线索，不换算小数年</h2><p>结果不再把天数除以 365.2425 显示小数年，也不用小数年预测资格日或养老金比例。Service Canada 的参考指南把居住界定为“通常以加拿大为家”：实际在加不必然就是居民，一段时间也只能通常居住在一个国家。</p><p>证据清单以十八岁后各国居住期为主线，再整理出入境、住所、家庭、工作、就学、税务、医疗联系和法律身份文件。它是准备线索，不是 Service Canada 承诺接受的封闭材料表。</p></section>
-  <section class="section"><h2>与 IRCC 官方计算器的差异</h2><div class="grid"><article class="card"><h3>本站多算五套系统</h3><p>优点是能看到哪个节点先到；代价是不能替任何主管机构作正式认定。</p></article><article class="card"><h3>本站不自动认例外</h3><p>官方申请会收证据并由官员判断；本站把争议留给证据与专业审查。</p></article><article class="card"><h3>本站记录可导出</h3><p>导出的是你输入的 JSON，不是 IRCC 计算结果，也不应当作官方收据。</p></article></div></section>
+  <section class="section"><h2>与 IRCC 官方计算器的差异</h2><div class="grid"><a class="card" href={href('tools/day-ledger/')}><h3>本站多算五套系统</h3><p>优点是能看到哪个节点先到；代价是不能替任何主管机构作正式认定。</p><span class="card-cta">打开天数总账 →</span></a><a class="card" href={href('sources/')}><h3>本站不自动认例外</h3><p>官方申请会收证据并由官员判断；本站把争议留给证据与专业审查。</p><span class="card-cta">核对官方来源 →</span></a><a class="card" href={href('tools/day-ledger/')}><h3>本站记录可导出</h3><p>导出的是你输入的 JSON，不是 IRCC 计算结果，也不应当作官方收据。</p><span class="card-cta">管理家庭文件 →</span></a></div></section>
   <section class="section"><h2>已知答案样例（{cases.length + familyCases.length} 个）</h2><table><thead><tr><th>样例</th><th>边界</th><th>预期断言</th></tr></thead><tbody>{[...cases, ...familyCases].map((sample)=><tr><td><code>{sample.id}</code></td><td>{sample.note}</td><td>{Object.entries(sample.expected).map(([key,value])=>`${key}=${value}`).join('；')}</td></tr>)}</tbody></table></section>
 </div></Base>

@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+import { tools } from '../../lib/content.mjs';
+import { href } from '../../lib/site.mjs';
+---
+<Base title="工具"><div class="wrap"><header class="path-hero"><p class="eyebrow">日期只留在当前浏览器</p><h1>六件事，各用一把合适的工具</h1><p class="lede">工具给估算、比较和证据清单，不替主管机关或持牌专业人士作个案裁决。</p></header><section class="grid">{Object.values(tools).map((tool) => <a class="card" href={href(tool.href)}><span class="tag">本地工具</span><h2>{tool.label}</h2><p>{tool.summary}</p><span class="card-cta">打开工具 →</span></a>)}</section></div></Base>

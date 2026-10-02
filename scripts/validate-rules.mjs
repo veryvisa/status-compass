@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { questions } from '../src/lib/questions.mjs';
 
-const allowedSource = /^https:\/\/(www\.|ircc\.)?(canada\.ca|ontario\.ca|www2\.gov\.bc\.ca|www\.bclaws\.gov\.bc\.ca)\//;
+const allowedSource = /^https:\/\/([a-z0-9-]+\.)*(canada\.ca|justice\.gc\.ca|ontario\.ca|gov\.bc\.ca|bclaws\.gov\.bc\.ca|chinatax\.gov\.cn|china-embassy\.gov\.cn|sz\.gov\.cn)\//i;
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
 export function validateRules(payload, questionBank = questions) {

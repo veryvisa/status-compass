@@ -1,0 +1,20 @@
+---
+import { href } from '../lib/site.mjs';
+import { tools as toolMap } from '../lib/content.mjs';
+
+const { data, paths = [], guides = [] } = Astro.props;
+const pathMap = new Map(paths.map((entry) => [entry.data.slug, entry.data]));
+const guideMap = new Map(guides.map((entry) => [entry.data.slug, entry.data]));
+const pathCards = data.related_paths.map((slug) => ({ slug, ...pathMap.get(slug) })).filter((item) => item.title);
+const guideCards = data.related_guides.map((slug) => ({ slug, ...guideMap.get(slug) })).filter((item) => item.title);
+const toolCards = data.tools.map((slug) => ({ slug, ...toolMap[slug] })).filter((item) => item.label);
+---
+{(pathCards.length || guideCards.length || toolCards.length || data.forum.length) && <section class="related section" aria-labelledby="related-title">
+  <div class="section-head"><div><p class="eyebrow">继续往下走</p><h2 id="related-title">相关路径、工具与详解</h2></div></div>
+  <div class="grid related-grid">
+    {pathCards.map((item) => <a class="card" href={href(`paths/${item.slug}/`)}><span class="tag">处境</span><h3>{item.title}</h3><p>{item.summary}</p><span class="card-cta">换到这条路径 →</span></a>)}
+    {guideCards.map((item) => <a class="card" href={href(`guides/${item.slug}/`)}><span class="tag">专题</span><h3>{item.title}</h3><p>{item.summary}</p><span class="card-cta">看本站摘要 →</span></a>)}
+    {toolCards.map((item) => <a class="card" href={href(item.href)}><span class="tag">工具</span><h3>{item.label}</h3><p>{item.summary}</p><span class="card-cta">打开工具 →</span></a>)}
+    {data.forum.map((tid) => <a class="card forum-card" href={`https://bbs.fcgvisa.com/t/${tid}`}><span class="tag">论坛</span><h3>真实问题与详细讨论</h3><p>主题 t/{tid} 保留背景、争议、证据与读者讨论。</p><span class="card-cta">读论坛详解 →</span></a>)}
+  </div>
+</section>}

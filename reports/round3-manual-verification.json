@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-01",
+  "method": "针对自动摘录未命中及需要核对缺席项的规则，重新打开当前官方页面并按页面正文人工判定。",
+  "results": [
+    {
+      "id": "china.hukou.cancel_after_foreign_nationality",
+      "result": "accepted",
+      "source_url": "https://ga.sz.gov.cn/JMHD/YWZSK/CRJGL_ZS/content/post_10578929.html",
+      "evidence": "深圳市公安局答复明确写明已加入外国国籍人员需要注销中国国内户口，并可凭外国护照办理签证或居留许可。"
+    },
+    {
+      "id": "pr.status_loss_ways",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/status.html",
+      "evidence": "IRCC 当前页面逐项列出正式认定、自愿放弃、驱逐令生效和成为加拿大公民四种失去 PR 身份的路径。"
+    },
+    {
+      "id": "t1135.gross_negligence_penalty",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-penalties.html",
+      "evidence": "CRA 问答页明确给出每月 500 加元、最多 24 个月、最高 12,000 加元。"
+    },
+    {
+      "id": "cn_iit.domicile",
+      "result": "accepted",
+      "source_url": "https://www.chinatax.gov.cn/n810356/n3255681/c4251584/content.html",
+      "evidence": "国家税务总局页面给出的住所定义包含因户籍、家庭、经济利益关系而在中国境内习惯性居住。"
+    },
+    {
+      "id": "departure_tax.t2061a",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/dispositions-property.html",
+      "evidence": "CRA 当前页面明确要求以 T2061A 作出把指定财产纳入离境视同处置的选择。"
+    },
+    {
+      "id": "oas.oasri_exempt_list_no_china",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4155/t4155-old-security-return-income-guide-non-residents.html",
+      "evidence": "逐项核对 CRA 当前免交 OASRI 地区清单，未列中国大陆或香港。"
+    },
+    {
+      "id": "cpp.foreign_currency_list",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/benefit-amount.html",
+      "evidence": "Service Canada 当前当地货币支付清单列有 Hong Kong、未列中国大陆；页面说明清单之外以加元付款。"
+    },
+    {
+      "id": "cgeb.renamed",
+      "result": "accepted",
+      "source_url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html",
+      "evidence": "CRA 当前页面确认 2026 年 7 月更名、资格与算法延续，并列明 2026 至 2031 年的 25% 增幅。"
+    }
+  ]
+}

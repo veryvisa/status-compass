@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import { sortPaths } from '../lib/content.mjs';
+import { href } from '../lib/site.mjs';
+
+const { currentSlug = '', relatedSlugs = [] } = Astro.props;
+const paths = sortPaths(await getCollection('paths'));
+---
+<nav class="situation-nav" aria-label="九种处境快速切换">
+  <span class="situation-label">九处境</span>
+  <div class="situation-scroll">
+    {paths.map((entry) => {
+      const current = entry.data.slug === currentSlug;
+      const related = !current && relatedSlugs.includes(entry.data.slug);
+      return <a
+        href={href(`paths/${entry.data.slug}/`)}
+        class:list={{ current, related }}
+        aria-current={current ? 'page' : undefined}
+      >{entry.data.title.replace(/：.*$/, '')}</a>;
+    })}
+  </div>
+</nav>

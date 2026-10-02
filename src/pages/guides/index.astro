@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SituationNav from '../../components/SituationNav.astro';
+import { sortGuides } from '../../lib/content.mjs';
+import { href } from '../../lib/site.mjs';
+const guides = sortGuides(await getCollection('guides'));
+---
+<Base title="专题详解"><div class="wrap"><SituationNav /><header class="path-hero"><p class="eyebrow">网站给总图，论坛讲细节</p><h1>九个专题详解</h1><p class="lede">每张卡先给可独立使用的摘要和关键数字；有论坛长文时直接去读，没有时先开放过渡全文。</p></header><section class="grid">{guides.map((entry) => <a class="card" href={href(`guides/${entry.data.slug}/`)}><span class="tag">专题摘要</span><h2>{entry.data.title}</h2><p>{entry.data.summary}</p><span class="card-cta">看摘要与详解入口 →</span></a>)}</section></div></Base>

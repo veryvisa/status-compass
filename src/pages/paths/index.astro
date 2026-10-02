@@ -1,6 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import audiences from '../../../data/audiences.json';
+import { sortPaths } from '../../lib/content.mjs';
 import { href } from '../../lib/site.mjs';
+const paths = sortPaths(await getCollection('paths'));
 ---
-<Base title="按处境找路"><div class="wrap"><header class="path-hero"><p class="eyebrow">不是身份标签，是眼下的难题</p><h1>从你的处境出发</h1><p class="lede">同一个人会在不同年份走进不同路径。先选现在最接近的一项，再把日期带进工具。</p></header><section class="grid">{audiences.map((item) => <article class="card"><span class="tag">{item.kicker}</span><h2>{item.label}</h2><p>{item.conclusion}</p><a href={href(`paths/${item.slug}/`)}>打开路径 →</a></article>)}</section></div></Base>
+<Base title="按处境找路"><div class="wrap"><header class="path-hero"><p class="eyebrow">不是身份标签，是眼下的难题</p><h1>从你的处境出发</h1><p class="lede">同一个人会在不同年份走进不同路径。九页都含完整算例、行动时间表、误区、证据清单与专业求助边界。</p></header><section class="grid">{paths.map((entry) => <a class="card" href={href(`paths/${entry.data.slug}/`)}><span class="tag">处境路线</span><h2>{entry.data.title}</h2><p>{entry.data.summary}</p><span class="card-cta">打开完整路径 →</span></a>)}</section></div></Base>

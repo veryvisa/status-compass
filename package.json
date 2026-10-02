@@ -11,9 +11,10 @@
     "quiz:batches": "node scripts/quiz-review-batches.mjs",
     "quiz:crosscheck": "node scripts/quiz-crosscheck.mjs",
     "gate": "node scripts/gate.mjs",
-    "check": "node scripts/validate-rules.mjs && npm run test && npm run build && npm run gate"
+    "check": "node scripts/validate-rules.mjs && node scripts/content-gate.mjs && npm run test && npm run build && npm run gate"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.1",
     "astro": "7.3.2"
   }
 }

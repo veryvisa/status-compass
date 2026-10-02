@@ -1,0 +1,8 @@
+---
+import { href } from '../lib/site.mjs';
+const { previous, next, section = 'paths' } = Astro.props;
+---
+<nav class="prev-next" aria-label="上一篇和下一篇">
+  {previous ? <a href={href(`${section}/${previous.data.slug}/`)}><span>上一篇</span><strong>{previous.data.title}</strong></a> : <span></span>}
+  {next ? <a href={href(`${section}/${next.data.slug}/`)}><span>下一篇</span><strong>{next.data.title}</strong></a> : <span></span>}
+</nav>

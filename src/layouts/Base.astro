@@ -6,6 +6,14 @@ const {
   description = '把同一份出入境记录放进身份、税务、医保和养老规则里一起看。'
 } = Astro.props;
 const fullTitle = title === '枫居罗盘' ? title : `${title} · 枫居罗盘`;
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { label: '处境', path: 'paths/', match: '/paths/' },
+  { label: '工具', path: 'tools/', match: '/tools/' },
+  { label: '专题', path: 'guides/', match: '/guides/' },
+  { label: '入籍考试', path: 'citizenship-test/', match: '/citizenship-test/' },
+  { label: '怎么算的', path: 'how-it-works/', match: '/how-it-works/' }
+];
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -22,10 +30,7 @@ const fullTitle = title === '枫居罗盘' ? title : `${title} · 枫居罗盘`;
     <header class="mast">
       <a class="brand" href={href()}><span aria-hidden="true">⌖</span><span>枫居罗盘<small>Maple Status Compass</small></span></a>
       <nav aria-label="主导航">
-        <a href={href('tools/day-ledger/')}>天数总账</a>
-        <a href={href('paths/')}>按处境找路</a>
-        <a href={href('citizenship-test/')}>入籍练习</a>
-        <a href={href('how-it-works/')}>怎么算的</a>
+        {navItems.map((item) => <a href={href(item.path)} aria-current={currentPath.includes(item.match) ? 'page' : undefined}>{item.label}</a>)}
       </nav>
     </header>
     <main id="main"><slot /></main>
