@@ -73,11 +73,11 @@ if (form) {
       const exceptionRows = accompanyingCitizen.length ? `<h3>陪同公民配偶标注</h3><ul class="result-list">${accompanyingCitizen.map((item) => `<li><strong>${item.matched ? '已对上，仍未加回' : '未对上'}</strong><br>${escapeHtml(item.reason)}</li>`).join('')}</ul>` : '';
       if (!r) return `<article class="panel member-result"><h2>${escapeHtml(member.name)}</h2><p class="muted">此成员没有 PR 日期，当前只作家庭关系与公民陪同行程参照，不生成个人五尺结果。</p>${exceptionRows}</article>`;
       return `<article class="panel member-result"><h2>${escapeHtml(member.name)}</h2><div class="metrics">
-        ${metric('PR 五年尺', r.pr.days, `缺 ${r.pr.missing} 天；窗口从 ${r.pr.windowStart}`)}
-        ${metric('入籍尺', r.citizenship.total, `PR 后 ${r.citizenship.prDays} ＋ PR 前折算 ${r.citizenship.prePrCredit}`)}
-        ${metric('本税年在加', r.tax.days, `${r.tax.signal ? '越过' : '未越过'} 183 天信号，不能单独定税务居民`)}
-        ${metric(`${r.health.province} 医保尺`, r.health.days, r.health.signal)}
-        ${metric('OAS 居住天数线索', r.oas.days, '只供整理通常居住证据，不直接换成资格年数')}
+        ${metric('PR 五年尺', r.pr.days, `缺 ${r.pr.missing} 天；窗口从 ${r.pr.windowStart}；本规则自 ${r.ruleVersions.pr} 起`)}
+        ${metric('入籍尺', r.citizenship.total, `PR 后 ${r.citizenship.prDays} ＋ PR 前折算 ${r.citizenship.prePrCredit}；本规则自 ${r.ruleVersions.citizenship} 起`)}
+        ${metric('本税年在加', r.tax.days, `${r.tax.signal ? '越过' : '未越过'} 183 天信号，不能单独定税务居民；本规则自 ${r.ruleVersions.tax} 起`)}
+        ${metric(`${r.health.province} 医保尺`, r.health.days, `${r.health.signal}；本规则自 ${r.ruleVersions.health} 起`)}
+        ${metric('OAS 居住天数线索', r.oas.days, `只供整理通常居住证据，不直接换成资格年数；本规则自 ${r.ruleVersions.oas} 起`)}
       </div>${exceptionRows}<h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${escapeHtml(event.label)}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol></article>`;
     }).join('');
     status.textContent = `已在当前页面完成 ${family.members.length} 名成员的计算；没有上传任何记录。`;

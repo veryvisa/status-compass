@@ -1,4 +1,4 @@
-import { value } from './rules.mjs';
+import { rule, value } from './rules.mjs';
 
 const DAY = 86400000;
 export const iso = (date) => new Date(date).toISOString().slice(0, 10);
@@ -64,18 +64,20 @@ export function yearPresence(year, asOf, trips = [], canadaStart) {
 
 export function prMeasure(input, asOfOverride) {
   const asOf = date(asOfOverride || input.asOf);
+  const v = (id) => value(id, asOf);
   const prDate = date(input.prDate);
-  if (asOf < prDate) return { days: 0, required: value('pr.required_days'), missing: value('pr.required_days'), windowStart: iso(prDate), underFiveYears: true };
-  const fiveYearAnniversary = addYears(prDate, value('pr.window_years'));
+  if (asOf < prDate) return { days: 0, required: v('pr.required_days'), missing: v('pr.required_days'), windowStart: iso(prDate), underFiveYears: true };
+  const fiveYearAnniversary = addYears(prDate, v('pr.window_years'));
   const underFiveYears = asOf < fiveYearAnniversary;
-  const windowStart = underFiveYears ? prDate : addDays(addYears(asOf, -value('pr.window_years')), 1);
+  const windowStart = underFiveYears ? prDate : addDays(addYears(asOf, -v('pr.window_years')), 1);
   const days = presenceDays(windowStart, asOf, input.trips);
-  return { days, required: value('pr.required_days'), missing: Math.max(0, value('pr.required_days') - days), windowStart: iso(windowStart), underFiveYears, firstFiveYearEnd: iso(fiveYearAnniversary) };
+  return { days, required: v('pr.required_days'), missing: Math.max(0, v('pr.required_days') - days), windowStart: iso(windowStart), underFiveYears, firstFiveYearEnd: iso(fiveYearAnniversary) };
 }
 
 export function citizenshipMeasure(input, asOfOverride) {
   const signingDate = date(asOfOverride || input.asOf);
-  const periodStart = addYears(signingDate, -value('citizenship.window_years'));
+  const v = (id) => value(id, signingDate);
+  const periodStart = addYears(signingDate, -v('citizenship.window_years'));
   const periodEnd = addDays(signingDate, -1);
   const prDate = date(input.prDate);
   const prStart = maxDate(periodStart, prDate);
@@ -86,13 +88,14 @@ export function citizenshipMeasure(input, asOfOverride) {
     const preEnd = minDate(periodEnd, addDays(prDate, -1));
     prePrRaw = preEnd >= preStart ? presenceDays(preStart, preEnd, input.trips) : 0;
   }
-  const prePrCredit = Math.min(value('citizenship.pre_pr_max'), prePrRaw * value('citizenship.pre_pr_factor'));
+  const prePrCredit = Math.min(v('citizenship.pre_pr_max'), prePrRaw * v('citizenship.pre_pr_factor'));
   const total = prDays + prePrCredit;
-  return { total, prDays, prePrRaw, prePrCredit, required: value('citizenship.required_days'), missing: Math.max(0, value('citizenship.required_days') - total), periodStart: iso(periodStart), periodEnd: iso(periodEnd) };
+  return { total, prDays, prePrRaw, prePrCredit, required: v('citizenship.required_days'), missing: Math.max(0, v('citizenship.required_days') - total), periodStart: iso(periodStart), periodEnd: iso(periodEnd) };
 }
 
 export function healthMeasure(input) {
   const asOf = date(input.asOf);
+  const v = (id) => value(id, asOf);
   const residenceStart = date(input.canadaStart || input.temporaryStart || input.prDate);
   if (input.province === 'on') {
     const rollingStart = maxDate(addDays(addYears(asOf, -1), 1), residenceStart);
@@ -101,8 +104,8 @@ export function healthMeasure(input) {
     const initialAssessedThrough = minDate(asOf, initialEnd);
     const initialDays = presenceDays(residenceStart, initialAssessedThrough, input.trips);
     const initialComplete = asOf >= initialEnd;
-    const required = value('ohip.presence_days');
-    const initialRequired = value('ohip.initial_presence_days');
+    const required = v('ohip.presence_days');
+    const initialRequired = v('ohip.initial_presence_days');
     return {
       province: 'Ontario', days, required,
       windowType: 'rolling_12_months', windowStart: iso(rollingStart), windowEnd: iso(asOf),
@@ -119,7 +122,7 @@ export function healthMeasure(input) {
   const calendarStart = maxDate(`${year}-01-01`, residenceStart);
   const days = presenceDays(calendarStart, asOf, input.trips);
   return {
-    province: 'British Columbia', days, required: null, requiredMonths: value('msp.presence_months'),
+    province: 'British Columbia', days, required: null, requiredMonths: v('msp.presence_months'),
     windowType: 'calendar_year', windowStart: iso(calendarStart), windowEnd: iso(asOf),
     signal: `${year} 日历年截至计算日记录 ${days} 天；官方单位为六个月，本工具不硬换成固定天数`
   };
@@ -129,7 +132,7 @@ export function oasMeasure(input) {
   const start = maxDate(input.canadaStart || input.temporaryStart || input.prDate, input.birthDate ? addYears(input.birthDate, 18) : input.canadaStart || input.prDate);
   const days = presenceDays(start, input.asOf, input.trips);
   const years = Math.floor(days / 365.2425 * 100) / 100;
-  return { days, years, fraction: Math.min(1, years / value('oas.full_years')), thresholds: [value('oas.minimum_years_canada'), value('oas.minimum_years_abroad'), value('oas.full_years')] };
+  return { days, years, fraction: Math.min(1, years / value('oas.full_years', input.asOf)), thresholds: [value('oas.minimum_years_canada', input.asOf), value('oas.minimum_years_abroad', input.asOf), value('oas.full_years', input.asOf)] };
 }
 
 function firstDate(start, years, predicate) {
@@ -143,7 +146,7 @@ export function buildTimeline(input) {
   const prDate = prMeasure(input, start).missing === 0 ? iso(start) : firstDate(start, 5, (d) => prMeasure(input, d).missing === 0);
   const citizenshipDate = citizenshipMeasure(input, start).missing === 0 ? iso(start) : firstDate(start, 5, (d) => citizenshipMeasure(input, d).missing === 0);
   const year = start.getUTCFullYear();
-  const taxDate = yearPresence(year, start, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days') ? iso(start) : firstDate(start, 1, (d) => d.getUTCFullYear() === year && yearPresence(year, d, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days'));
+  const taxDate = yearPresence(year, start, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days', start) ? iso(start) : firstDate(start, 1, (d) => d.getUTCFullYear() === year && yearPresence(year, d, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days', d));
   const oas = oasMeasure(input);
   const oasEvents = oas.thresholds.filter((threshold) => oas.years < threshold).map((threshold) => ({ label: `OAS 居住年数达到 ${threshold} 年`, date: iso(addDays(start, Math.ceil((threshold - oas.years) * 365.2425))) })).filter((event) => date(event.date) <= addYears(start, 5));
   return [
@@ -159,5 +162,17 @@ export function calculateLedger(input) {
   const pr = prMeasure(cleaned);
   const citizenship = citizenshipMeasure(cleaned);
   const taxDays = yearPresence(date(cleaned.asOf).getUTCFullYear(), cleaned.asOf, cleaned.trips, cleaned.canadaStart || cleaned.temporaryStart || cleaned.prDate);
-  return { pr, citizenship, tax: { days: taxDays, signal: taxDays >= value('tax.deemed_resident_days') }, health: healthMeasure(cleaned), oas: oasMeasure(cleaned), timeline: buildTimeline(cleaned) };
+  const provinceRule = cleaned.province === 'on' ? 'ohip.presence_days' : 'msp.presence_months';
+  return {
+    pr, citizenship,
+    tax: { days: taxDays, signal: taxDays >= value('tax.deemed_resident_days', cleaned.asOf) },
+    health: healthMeasure(cleaned), oas: oasMeasure(cleaned), timeline: buildTimeline(cleaned),
+    ruleVersions: {
+      pr: rule('pr.required_days', cleaned.asOf).effective_from,
+      citizenship: rule('citizenship.required_days', cleaned.asOf).effective_from,
+      tax: rule('tax.deemed_resident_days', cleaned.asOf).effective_from,
+      health: rule(provinceRule, cleaned.asOf).effective_from,
+      oas: rule('oas.full_years', cleaned.asOf).effective_from
+    }
+  };
 }
