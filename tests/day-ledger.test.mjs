@@ -6,7 +6,7 @@ import { calculateLedger, parseTripInput, presenceDays } from '../src/lib/day-le
 const cases = JSON.parse(fs.readFileSync(new URL('./cases.json', import.meta.url)));
 const at = (object, dotted) => dotted.split('.').reduce((value, key) => value[key], object);
 
-test('known-answer case inventory has at least 20 cases', () => assert.ok(cases.length >= 20));
+test('known-answer case inventory has at least 26 cases', () => assert.ok(cases.length >= 26));
 for (const sample of cases) {
   test(`known answer: ${sample.id}`, () => {
     const actual = calculateLedger(sample.input);

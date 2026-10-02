@@ -28,7 +28,7 @@ if (form) {
       <div class="metric"><span>PR 五年尺</span><strong>${r.pr.days}</strong><small>缺 ${r.pr.missing} 天；窗口从 ${r.pr.windowStart}</small></div>
       <div class="metric"><span>入籍尺</span><strong>${r.citizenship.total}</strong><small>PR 后 ${r.citizenship.prDays} ＋ PR 前折算 ${r.citizenship.prePrCredit}</small></div>
       <div class="metric"><span>本税年在加</span><strong>${r.tax.days}</strong><small>${r.tax.signal ? '越过 183 天信号' : '未越过 183 天信号'}，不能据此单独定居民身份</small></div>
-      <div class="metric"><span>${r.health.province} 医保尺</span><strong>${r.health.days}</strong><small>${r.health.signal}</small></div>
+      <div class="metric"><span>${r.health.province} 医保尺</span><strong>${r.health.days}</strong><small>${r.health.signal}${r.health.initial ? `；新居民首 183 日已记录 ${r.health.initial.days} 天${r.health.initial.complete ? `，${r.health.initial.meets ? '达到' : '未达到'} 153 天` : '，窗口尚未结束'}` : ''}</small></div>
       <div class="metric"><span>OAS 居住估算</span><strong>${r.oas.years}</strong><small>约为全额的 ${(r.oas.fraction * 100).toFixed(1)}%；协定与例外另核</small></div>
     </div><h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${event.label}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol>`;
     status.textContent = '已在当前页面完成计算；没有上传任何记录。';

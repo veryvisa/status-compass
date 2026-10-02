@@ -92,10 +92,37 @@ export function citizenshipMeasure(input, asOfOverride) {
 }
 
 export function healthMeasure(input) {
-  const year = date(input.asOf).getUTCFullYear();
-  const days = yearPresence(year, input.asOf, input.trips, input.canadaStart || input.temporaryStart || input.prDate);
-  if (input.province === 'on') return { province: 'Ontario', days, required: value('ohip.presence_days'), signal: days >= value('ohip.presence_days') ? '达到本工具的天数信号' : '尚未达到天数信号；还要看首 183 日与例外' };
-  return { province: 'British Columbia', days, required: Math.round(365.2425 / 2), signal: days >= 183 ? '达到半年天数信号' : '尚未达到半年天数信号；法规例外另核' };
+  const asOf = date(input.asOf);
+  const residenceStart = date(input.canadaStart || input.temporaryStart || input.prDate);
+  if (input.province === 'on') {
+    const rollingStart = maxDate(addDays(addYears(asOf, -1), 1), residenceStart);
+    const days = presenceDays(rollingStart, asOf, input.trips);
+    const initialEnd = addDays(residenceStart, 182);
+    const initialAssessedThrough = minDate(asOf, initialEnd);
+    const initialDays = presenceDays(residenceStart, initialAssessedThrough, input.trips);
+    const initialComplete = asOf >= initialEnd;
+    const required = value('ohip.presence_days');
+    const initialRequired = value('ohip.initial_presence_days');
+    return {
+      province: 'Ontario', days, required,
+      windowType: 'rolling_12_months', windowStart: iso(rollingStart), windowEnd: iso(asOf),
+      meetsRolling: days >= required,
+      initial: {
+        days: initialDays, required: initialRequired,
+        periodStart: iso(residenceStart), periodEnd: iso(initialEnd), assessedThrough: iso(initialAssessedThrough),
+        complete: initialComplete, meets: initialComplete ? initialDays >= initialRequired : null
+      },
+      signal: `${iso(rollingStart)} 至 ${iso(asOf)} 共 ${days} 天；${days >= required ? '达到' : '未达到'}当前滚动窗口的 ${required} 天信号`
+    };
+  }
+  const year = asOf.getUTCFullYear();
+  const calendarStart = maxDate(`${year}-01-01`, residenceStart);
+  const days = presenceDays(calendarStart, asOf, input.trips);
+  return {
+    province: 'British Columbia', days, required: null, requiredMonths: value('msp.presence_months'),
+    windowType: 'calendar_year', windowStart: iso(calendarStart), windowEnd: iso(asOf),
+    signal: `${year} 日历年截至计算日记录 ${days} 天；官方单位为六个月，本工具不硬换成固定天数`
+  };
 }
 
 export function oasMeasure(input) {
