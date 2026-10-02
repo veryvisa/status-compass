@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "preview": "astro preview",
-    "build": "python3 ../bin/site_tokens.py --theme ../bin/site_framework/tokens/themes/status-compass.json --out public/theme.css --report reports/theme-report.json && astro build && python3 ../bin/site_framework.py --site status-compass --dist dist",
+    "build": "python3 ../bin/site_tokens.py --theme data/theme.json --out public/theme.css --report reports/theme-report.json && astro build && python3 scripts/site-framework.py --dist dist",
     "test": "node --test tests/*.test.mjs",
     "gate": "node scripts/gate.mjs",
     "check": "node scripts/validate-rules.mjs && npm run test && npm run build && npm run gate"

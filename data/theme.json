@@ -1,0 +1,15 @@
+{
+  "$description": "枫居罗盘：与加拿大身份地图同属冷色地域家族，但以海图蓝、铜红、同心刻度和航线为识别，不使用移民站的常青等高线。",
+  "id": "status-compass",
+  "name": "枫居罗盘",
+  "seed": {
+    "primary": {"h": 205, "c": 0.06, "$note": "海图蓝，承载跨制度规划与时间线"},
+    "accent": {"h": 28, "c": 0.14, "$note": "铜红，只用于方位、期限和风险节点"},
+    "neutral": {"h": 90, "c": 0.012, "$note": "旧海图纸色，保持长读舒适"}
+  },
+  "heading_font": "serif",
+  "radius": "l",
+  "density": "comfortable",
+  "motif": "compass-rings",
+  "cover": {"src": "cover.svg", "src_2x": "cover.svg", "tells": "同一组日期横跨身份、税务、医保与养老的罗盘刻度"}
+}
