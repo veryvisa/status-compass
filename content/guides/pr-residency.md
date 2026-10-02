@@ -5,7 +5,7 @@ summary: 五年滚动窗口内 730 天，出入境当天都算在加；陪公民
 updated: 2026-10-01
 forum_title: 2026 枫叶卡 730 天怎么算：滚动窗口、四种境外计入情形与被查举证清单
 site_digest: |
-  枫叶卡持有人要在每个五年期内累计至少 730 天合资格居住。已满五年的人，看审查日往前倒推的五年；登陆不满五年的人，看「登陆后第一个五年结束时能不能凑够」。审查发生在续卡、申请旅行证件（PRTD）和入境被问话的那一刻，不是每年自动算一次。
+  枫叶卡持有人要在每个五年期内累计至少 730 天合资格居住。已满五年的人，看审查日往前倒推的五年；登陆不满五年的人，看「登陆后第一个五年结束时能不能凑够」。审查发生在续卡、申请旅行证件（PRTD）和入境被问话的那一刻。
 
   可以计入的不只是人在加拿大的天数：在境外与加拿大公民配偶、同居伴侣（孩子则是父母）通常同住，或被加拿大企业、联邦或省公共服务全职派驻境外，以及陪同这类被派驻的 PR 配偶或父母，相应天数也可能计入，但每一种都要拿得出证据。
 
@@ -16,7 +16,7 @@ site_digest: |
   | 出境日、入境日 | 都算在加拿大 |
   | 境外不满 1,095 天时 | 续卡证明文件不是必交，但不交可能影响审查 |
 
-  最容易错的两点：一是把出境日和入境日当成境外天，几趟往返下来少算好几天，误以为不够；二是以为「卡没过期就没事」，其实审查看的是天数，不是卡面日期。
+  最容易错的两点：一是把出境日和入境日当成境外天，几趟往返下来少算好几天，误以为不够；二是只看卡面日期，审查看的却是天数。
 
   天数不够也不会自动丢身份：要等官员作出书面决定、上诉期过去或上诉失败。境外被拒后向移民上诉庭上诉的期限是收到决定后 60 天，人道与同情因素是天数不足时唯一的法定通道，举证责任在申请人一方。
 
@@ -49,7 +49,7 @@ forum: [56609, 56532, 58866]
 
 第二，窗口是滚动的。审查日不同，窗口就不同；五年前那一趟长期离境，随着时间推移会滑出窗口。同一个人，今天不够，半年后可能就够了，反过来也可能。
 
-第三，窗口的长度是五个日历年，中间若含 2 月 29 日，窗口就是 1,826 天，不是 1,825 天。这是日历算术，不是额外规则，但手算时常被漏掉。
+第三，窗口的长度是五个日历年，中间若含 2 月 29 日，窗口就是 1,826 天。这只是日历算术，手算时却常被漏掉。
 
 ### 算例一：已满五年，三趟长期离境
 
@@ -67,7 +67,7 @@ forum: [56609, 56532, 58866]
 
 ### 算例二：边界情况，差一天和刚好够
 
-还是张先生，假设第三趟不是 2 月 15 日回来，而是 2026 年 3 月 13 日回来。第三趟的境外整天变成 87 天，窗口内在加拿大的天数正好 730 天，刚好达标。
+还是张先生，假设第三趟改在 2026 年 3 月 13 日回来。第三趟的境外整天变成 87 天，窗口内在加拿大的天数正好 730 天，刚好达标。
 
 如果是 3 月 14 日回来，就变成 729 天，差一天。再看错误口径：3 月 13 日回来的情形下，若把出入境当天都扣掉，只剩 724 天，人会以为差 6 天而去准备人道理由材料，其实根本不需要。
 
@@ -103,7 +103,7 @@ forum: [56609, 56532, 58866]
 
 ## 什么时候会被审查
 
-居住义务不是每年自动核算，而是在几个节点被检查：续 PR 卡、在境外申请 PRTD、入境时边境官员问话，以及申请入籍时 IRCC 查看过往行程。续卡指南写明，如果你在过去五年境外不满 1,095 天，下列证明文件不是必交，但不提交可能影响居住义务的评估。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html)
+居住义务在几个节点被检查：续 PR 卡、在境外申请 PRTD、入境时边境官员问话，以及申请入籍时 IRCC 查看过往行程。续卡指南写明，如果你在过去五年境外不满 1,095 天，下列证明文件不是必交，但不提交可能影响居住义务的评估。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html)
 
 在境外申请 PRTD 而持中国护照的人，还要提交公安机关出具的五年出入境记录，翻译成英文或法文。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5529-applying-permanent-resident-travel-document.html) 这份记录与你在申请表上填的行程会被逐趟比对，是华人申请人最常被发现行程漏填的地方。
 
@@ -115,7 +115,7 @@ forum: [56609, 56532, 58866]
 
 第二层是「人在加拿大」的生活痕迹：报税评估通知、租约或房产文件、雇主证明或工资单、学校记录、医疗记录、银行流水中的本地消费。
 
-第三层是例外情形的专门证据：陪同公民配偶要有关系证明与共同住址证明；企业派驻要有企业出具的信函，写明签字人职务、企业性质、派驻期限、全职条款、派驻后回加任职以及企业并非为满足居住义务而设立，必要时附公司注册文件和加拿大报税评估。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html)
+第三层是例外情形的专门证据：陪同公民配偶要有关系证明与共同住址证明；企业派驻要有企业出具的信函，写明签字人职务、企业性质、派驻期限、全职条款、派驻后回加任职以及企业设立另有真实经营目的、与满足居住义务无关，必要时附公司注册文件和加拿大报税评估。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html)
 
 ## 天数不够时：人道与同情因素
 
@@ -133,7 +133,7 @@ ENF 23 列出的考量因素包括：不合规程度（窗口内到底有多少�
 
 ## 最常见的误区
 
-一，把卡面有效期当成身份期限。卡过期不等于身份丢失，卡在有效期内也不等于天数够。审查看的是天数。
+一，把卡面有效期当成身份期限。卡过期了身份照样在，卡在有效期内天数也可能不够，审查看的是天数。
 
 二，出入境当天算成境外。多趟往返的人，这一项能差出十几天。
 

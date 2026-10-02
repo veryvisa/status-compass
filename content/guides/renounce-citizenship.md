@@ -70,7 +70,7 @@ IRCC 的资格页把条件写成：须是另一国公民或获批时将成为另
 
 放弃之后在加拿大没有任何身份；想回来常住要申请永久居民，来访要按国籍申请访客签证。[来源](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-0302-application-renounce-canadian-citizenship-subsection-9-1.html) 将来想恢复加拿大国籍，有专门的恢复程序，18 岁以上申请费 530 加元，核读于 2026 年 10 月 [来源](https://ircc.canada.ca/english/information/fees/fees.asp)；但恢复的前提之一是先重新成为永久居民，这本身就是一个完整的移民申请。
 
-### 放弃国籍和放弃 PR 不是一回事
+### 放弃国籍和放弃 PR 各走各的程序
 
 两者常被混在一起，区别其实很大：
 
