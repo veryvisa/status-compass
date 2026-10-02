@@ -131,8 +131,17 @@ export function healthMeasure(input) {
 export function oasMeasure(input) {
   const start = maxDate(input.canadaStart || input.temporaryStart || input.prDate, input.birthDate ? addYears(input.birthDate, 18) : input.canadaStart || input.prDate);
   const days = presenceDays(start, input.asOf, input.trips);
-  const years = Math.floor(days / 365.2425 * 100) / 100;
-  return { days, years, fraction: Math.min(1, years / value('oas.full_years', input.asOf)), thresholds: [value('oas.minimum_years_canada', input.asOf), value('oas.minimum_years_abroad', input.asOf), value('oas.full_years', input.asOf)] };
+  return {
+    days, periodStart: iso(start), periodEnd: iso(input.asOf), estimateOnly: true,
+    evidenceChecklist: [
+      '列出十八岁后在每个国家通常居住的起止日，不把短期访问当成居住',
+      '护照、CBSA 记录、机票与旧证件，用来复核出入境日期',
+      '住房与生活重心材料，如租约、房产、水电账单及省级证件',
+      '家庭、工作、就学、税务和医疗联系，用来说明当时生活中心',
+      '公民、归化、护照、登陆纸、PR 卡或临时居民许可等法律身份文件',
+      '若主张境外期间仍可计入，另整理境外就业、学业、陪同关系及在加永久住所证明'
+    ]
+  };
 }
 
 function firstDate(start, years, predicate) {
@@ -147,13 +156,10 @@ export function buildTimeline(input) {
   const citizenshipDate = citizenshipMeasure(input, start).missing === 0 ? iso(start) : firstDate(start, 5, (d) => citizenshipMeasure(input, d).missing === 0);
   const year = start.getUTCFullYear();
   const taxDate = yearPresence(year, start, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days', start) ? iso(start) : firstDate(start, 1, (d) => d.getUTCFullYear() === year && yearPresence(year, d, input.trips, input.canadaStart || input.prDate) >= value('tax.deemed_resident_days', d));
-  const oas = oasMeasure(input);
-  const oasEvents = oas.thresholds.filter((threshold) => oas.years < threshold).map((threshold) => ({ label: `OAS 居住年数达到 ${threshold} 年`, date: iso(addDays(start, Math.ceil((threshold - oas.years) * 365.2425))) })).filter((event) => date(event.date) <= addYears(start, 5));
   return [
     { label: 'PR 天数达到门槛（假设以后不再离境）', date: prDate },
     { label: '入籍实际居住达到门槛（仍须核报税、语言及禁限条件）', date: citizenshipDate },
-    { label: '本税年达到 183 天信号（不能单独决定税务居民）', date: taxDate },
-    ...oasEvents
+    { label: '本税年达到 183 天信号（不能单独决定税务居民）', date: taxDate }
   ].filter((event) => event.date).sort((a, b) => a.date.localeCompare(b.date));
 }
 

@@ -77,8 +77,8 @@ if (form) {
         ${metric('入籍尺', r.citizenship.total, `PR 后 ${r.citizenship.prDays} ＋ PR 前折算 ${r.citizenship.prePrCredit}；本规则自 ${r.ruleVersions.citizenship} 起`)}
         ${metric('本税年在加', r.tax.days, `${r.tax.signal ? '越过' : '未越过'} 183 天信号，不能单独定税务居民；本规则自 ${r.ruleVersions.tax} 起`)}
         ${metric(`${r.health.province} 医保尺`, r.health.days, `${r.health.signal}；本规则自 ${r.ruleVersions.health} 起`)}
-        ${metric('OAS 居住天数线索', r.oas.days, `只供整理通常居住证据，不直接换成资格年数；本规则自 ${r.ruleVersions.oas} 起`)}
-      </div>${exceptionRows}<h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${escapeHtml(event.label)}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol></article>`;
+        ${metric('OAS 居住天数线索', r.oas.days, `从 ${r.oas.periodStart} 记到 ${r.oas.periodEnd}；不换成小数年或资格比例；本规则自 ${r.ruleVersions.oas} 起`)}
+      </div>${exceptionRows}<details><summary>OAS 通常居住事实与证据清单</summary><ul class="result-list">${r.oas.evidenceChecklist.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul><p class="help">这是整理清单，不是 Service Canada 承诺接受的封闭材料表；官方可在申请后要求其他文件。</p></details><h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${escapeHtml(event.label)}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol></article>`;
     }).join('');
     status.textContent = `已在当前页面完成 ${family.members.length} 名成员的计算；没有上传任何记录。`;
     return family;

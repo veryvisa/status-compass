@@ -37,3 +37,12 @@ test('calculator source has a zero-network contract', () => {
   const source = files.map((path) => fs.readFileSync(new URL(path, import.meta.url), 'utf8')).join('\n');
   for (const forbidden of [/\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /WebSocket/, /EventSource/, /<form[^>]+action=/i]) assert.doesNotMatch(source, forbidden);
 });
+
+test('OAS output stays as days plus evidence and never returns decimal years or a pension fraction', () => {
+  const result = calculateLedger({ prDate: '2020-01-01', canadaStart: '2020-01-01', birthDate: '1980-01-01', asOf: '2026-01-01', province: 'bc', trips: [] });
+  assert.equal(Number.isInteger(result.oas.days), true);
+  assert.ok(result.oas.evidenceChecklist.length >= 6);
+  assert.equal('years' in result.oas, false);
+  assert.equal('fraction' in result.oas, false);
+  assert.equal(result.timeline.some((event) => event.label.includes('OAS')), false);
+});
