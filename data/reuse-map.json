@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-10-01",
+  "items": [
+    {"source":"../ca-immigration-site/data/reader-tools/rules.json","reuse":"PR 与入籍五年窗口、出入境边界、PR 前半天折算的既有口径；在本站重构为逐条 claim/value/source_quote 的超集。","future_authority":"本站 data/rules.json 成为生活阶段工具的规则正本；移民站 status-clock 下一轮改为构建时只读本站 verified 子集或直接导流。"},
+    {"source":"../ca-immigration-site/src/lib/reader-tools.mjs 与 src/pages/tools/status-clock","reuse":"沿用纯前端、本地计算、示例先行与 PR/入籍分开呈现；扩展为五把尺子、粘贴/JSON 与未来时间线。","future_authority":"移民站不再扩展自己的时钟算法。"},
+    {"source":"../ca-immigration-site/data/identity.json 与 data/cards/identity-residency.json","reuse":"税务问卷沿用“身份不等于税务居民、先看重要联系、次要联系合并看、183 天只是条件性信号”的内容边界。"},
+    {"source":"../academy/site/calc 与 ../academy/rules/ca-accounts-2026.json","reuse":"只读参考 CCB/GIS/OAS 计算层；本站第一版只做离境资格与通知节点，不复制季度金额和给付表，避免产生第二套金额规则。"},
+    {"source":"../cross-border/content/atlas/ca-04.md","reuse":"离境税工具沿用“先定税务居民离境日，再看视同处置、表格与担保”的次序；不把估算税额写成应纳税额。"},
+    {"source":"../fcgbbs/batches/gemini-dr-control/reports/118.md 与 446-nlm.md","reuse":"复核入籍/PR 易错边界、语言与考试来源、离境税表格链；第三方来源没有进入 verified 规则。"},
+    {"source":"../forum-mirror/index/topics.jsonl","reuse":"核实 t/56609、t/58296、t/58462、t/58716、t/58809、t/58866 均为 live/visible；路径页只链论坛，不重写长正文。"}
+  ]
+}

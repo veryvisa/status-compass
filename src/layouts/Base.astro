@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import { href } from '../lib/site.mjs';
+const {
+  title = '枫居罗盘',
+  description = '把同一份出入境记录放进身份、税务、医保和养老规则里一起看。'
+} = Astro.props;
+const fullTitle = title === '枫居罗盘' ? title : `${title} · 枫居罗盘`;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#243f48" />
+    <title>{fullTitle}</title>
+    <link rel="stylesheet" href={href('theme.css')} />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="mast">
+      <a class="brand" href={href()}><span aria-hidden="true">⌖</span><span>枫居罗盘<small>Maple Status Compass</small></span></a>
+      <nav aria-label="主导航">
+        <a href={href('tools/day-ledger/')}>天数总账</a>
+        <a href={href('paths/')}>按处境找路</a>
+        <a href={href('citizenship-test/')}>入籍练习</a>
+        <a href={href('how-it-works/')}>怎么算的</a>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer>
+      <p><strong>这是规划工具，不是个案裁决。</strong> 税务居民、PR 例外、离境税和资格争议必须回到主管机构原文，并在需要时找持牌移民或税务专业人士。</p>
+      <p><a href={href('sources/')}>规则与官方来源</a> · <a href="https://bbs.fcgvisa.com/">枫出国论坛</a> · 数据只留在当前浏览器</p>
+    </footer>
+  </body>
+</html>

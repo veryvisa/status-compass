@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="抽象罗盘与五条时间轨道">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#162d35"/><stop offset="1" stop-color="#42666a"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#f2ddbd" stop-opacity=".65"/><stop offset="1" stop-color="#f2ddbd" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sea)"/>
+  <circle cx="1180" cy="430" r="420" fill="url(#glow)"/>
+  <g fill="none" stroke="#e9e1d0" stroke-opacity=".55">
+    <circle cx="1180" cy="430" r="110"/><circle cx="1180" cy="430" r="190"/><circle cx="1180" cy="430" r="270"/><circle cx="1180" cy="430" r="350"/>
+    <path d="M1180 34v792M784 430h792"/><path d="M900 150l560 560M900 710l560-560" stroke-opacity=".2"/>
+  </g>
+  <path d="M1180 172l42 228 199 30-199 30-42 228-42-228-199-30 199-30z" fill="#bd5b48" fill-opacity=".88"/>
+  <circle cx="1180" cy="430" r="20" fill="#f8f1df"/>
+  <g fill="none" stroke="#f8f1df" stroke-opacity=".62" stroke-width="5">
+    <path d="M80 690c190-180 325-62 450-190s250-108 370-30"/>
+    <path d="M70 744c190-145 340-18 470-148s238-88 360-30" stroke-opacity=".4"/>
+    <path d="M90 798c180-110 330 8 455-102s235-65 355-22" stroke-opacity=".22"/>
+  </g>
+</svg>

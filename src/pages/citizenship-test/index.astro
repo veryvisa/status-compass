@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { questions, chapters } from '../../lib/questions.mjs';
+import { rule } from '../../lib/rules.mjs';
+const count = rule('citizenship.test_questions');
+const minutes = rule('citizenship.test_minutes');
+const pass = rule('citizenship.test_pass');
+---
+<Base title="入籍考试练习"><div class="narrow tool-shell"><header class="tool-head"><p class="eyebrow">{questions.length} 题 · 全部据官方指南出题</p><h1>先按章补洞，再做限时模拟</h1><p class="lede">题目不是从第三方题库搬来的。每题都显示 Discover Canada 的章节出处；错题编号只存在当前浏览器。</p></header>
+  <section class="panel stack" data-quiz data-count={count.value} data-minutes={minutes.value} data-pass={pass.value}>
+    <div class="fields no-print"><div class="field"><label for="chapter">练习范围</label><select id="chapter" data-chapter><option value="all">全部章节</option>{chapters.map((chapter)=><option value={chapter}>{chapter}</option>)}</select></div><div class="actions"><button data-start="chapter">开始章节练习</button><button data-start="mock">开始限时模拟</button><button class="secondary" data-start="wrong">只练本机错题</button></div></div>
+    <div class="progress" aria-label="答题进度"><span style="width:0" data-progress></span></div><p class="muted" data-meta>选择练习方式。正式考试参数从 rules.json 读取。</p>
+    <div data-question><h2>准备好再开始</h2><p>模拟将抽取 {count.value} 题，限时 {minutes.value} 分钟，至少答对 {pass.value} 题达到现行通过线。</p></div>
+  </section>
+  <section class="section"><div class="warning"><strong>题库边界：</strong>本站练习用于熟悉官方指南，不代表 IRCC 真题。官方考试题目不会由本站取得或复刻。</div></section>
+</div><script id="question-data" type="application/json" set:html={JSON.stringify(questions)}></script><script>
+  const box=document.querySelector('[data-quiz]'); const all=JSON.parse(document.querySelector('#question-data').textContent); const view=box.querySelector('[data-question]'); const meta=box.querySelector('[data-meta]'); const bar=box.querySelector('[data-progress]');
+  let deck=[],index=0,score=0,deadline=null,timer=null; const key='maple-compass-wrong-v1';
+  const wrong=()=>new Set(JSON.parse(localStorage.getItem(key)||'[]')); const saveWrong=set=>localStorage.setItem(key,JSON.stringify([...set]));
+  const shuffled=items=>items.map((x,i)=>({x,n:(i*7919+37)%104729})).sort((a,b)=>a.n-b.n).map(v=>v.x);
+  function finish(){clearInterval(timer); const pass=Number(box.dataset.pass); view.innerHTML=`<h2>${deadline?'模拟':'练习'}完成</h2><p class="lede">答对 ${score} / ${deck.length} 题。${deck.length===Number(box.dataset.count)?(score>=pass?'达到现行模拟通过线。':'未达到现行模拟通过线，先回章节练习。'):''}</p>`;meta.textContent='错题已保存在当前浏览器，可用“只练本机错题”重做。';bar.style.width='100%';}
+  function show(){if(index>=deck.length)return finish(); const q=deck[index]; bar.style.width=`${index/deck.length*100}%`;meta.textContent=`第 ${index+1} / ${deck.length} 题 · ${q.chapter}`;view.innerHTML=`<h2>${q.prompt}</h2>${q.options.map((o,i)=>`<button class="quiz-option" data-answer="${i}">${o}</button>`).join('')}<p class="muted">出处：<a href="${q.source_url}">${q.source_label}</a></p>`;view.querySelectorAll('[data-answer]').forEach(btn=>btn.addEventListener('click',()=>answer(q,Number(btn.dataset.answer))));}
+  function answer(q,choice){const set=wrong();if(choice===q.answer){score++;set.delete(q.id)}else set.add(q.id);saveWrong(set);view.querySelectorAll('[data-answer]').forEach((btn,i)=>{btn.disabled=true;if(i===q.answer)btn.classList.add('correct');else if(i===choice)btn.classList.add('wrong')});setTimeout(()=>{index++;show()},500)}
+  function start(mode){clearInterval(timer); const chapter=box.querySelector('[data-chapter]').value; let pool=chapter==='all'?all:all.filter(q=>q.chapter===chapter); if(mode==='wrong')pool=all.filter(q=>wrong().has(q.id)); deck=shuffled(pool); if(mode==='mock'){deck=deck.slice(0,Number(box.dataset.count));deadline=Date.now()+Number(box.dataset.minutes)*60000;timer=setInterval(()=>{const left=Math.max(0,deadline-Date.now());meta.textContent=`第 ${index+1} / ${deck.length} 题 · 剩余 ${Math.ceil(left/60000)} 分钟`;if(!left)finish()},1000)}else deadline=null; index=0;score=0;if(!deck.length){view.innerHTML='<h2>目前没有这组题</h2><p>先完成普通练习，错题才会进入本机错题本。</p>';return}show()}
+  box.querySelectorAll('[data-start]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();start(button.dataset.start)}));
+</script></Base>

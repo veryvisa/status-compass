@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { rule } from '../../lib/rules.mjs';
+const threshold = rule('tax.deemed_resident_days');
+---
+<Base title="税务居民事实问卷"><div class="narrow tool-shell"><header class="tool-head"><p class="eyebrow">先整理事实，再判断</p><h1>税务居民不是一道天数题</h1><p class="lede">问卷把主要居所联系、次要联系、停留天数与税收协定冲突分开。结果只显示“倾向与灰区”，不代替 CRA 或专业意见。</p></header><form class="panel fields" data-tax-form data-rule={threshold.id}>
+  <fieldset class="field"><legend>你在加拿大保留哪些重要联系？</legend><label><input type="checkbox" name="major" value="home" /> 可供自己使用的住所</label><label><input type="checkbox" name="major" value="spouse" /> 配偶或同居伴侣在加拿大</label><label><input type="checkbox" name="major" value="dependants" /> 受抚养人在加拿大</label></fieldset>
+  <fieldset class="field"><legend>还有哪些次要联系？</legend><label><input type="checkbox" name="secondary" value="property" /> 车辆、家具等个人财产</label><label><input type="checkbox" name="secondary" value="economic" /> 银行、信用卡或其他经济联系</label><label><input type="checkbox" name="secondary" value="licence" /> 驾照、省医保、会员或社会联系</label></fieldset>
+  <div class="field"><label for="days">本税年在加拿大的天数或部分天数</label><input id="days" name="days" type="number" min="0" max="366" required value="0" /></div>
+  <div class="field"><label for="other">你是否也被另一税收协定国视为居民？</label><select id="other" name="other"><option value="unknown">不确定</option><option value="yes">是，可能要做协定加比</option><option value="no">没有</option></select></div>
+  <button type="submit">整理我的信号</button>
+  <div class="warning" data-tax-result role="status">填完后会显示哪些事实把你推向哪一边，以及下一份该看的官方材料。</div>
+  <p class="help">需要 CRA 意见时，可查看 <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/nr73.html">NR73</a>。复杂协定个案应找跨境 CPA 或税务律师。</p>
+</form></div><script define:vars={{ daysThreshold: threshold.value }}>
+  const form = document.querySelector('[data-tax-form]');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const major = [...form.querySelectorAll('[name=major]:checked')].length;
+    const secondary = [...form.querySelectorAll('[name=secondary]:checked')].length;
+    const days = Number(form.days.value);
+    const treaty = form.other.value;
+    let lead = '灰区：目前没有足够事实支持明确倾向。';
+    if (major > 0) lead = '信号偏向保留加拿大事实居民联系，但仍要看联系强度与离境安排。';
+    else if (days >= daysThreshold && treaty === 'no') lead = '触及视同居民天数信号，但仍须确认没有重要联系且不被协定判给另一国。';
+    else if (major === 0 && secondary <= 1 && days < daysThreshold) lead = '信号偏向非居民方向，但这不是个案结论，离境日与协定仍需核。';
+    if (treaty === 'yes') lead += ' 你还报告了双重居民可能，必须做税收协定加比分析。';
+    form.querySelector('[data-tax-result]').textContent = `${lead} 已记录：重要联系 ${major} 项、次要联系 ${secondary} 项、在加 ${days} 天。`;
+  });
+</script></Base>

@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import { rule } from '../../lib/rules.mjs';
+const reportThreshold = rule('departure_tax.t1161_threshold');
+const securityThreshold = rule('departure_tax.security_threshold');
+---
+<Base title="离境税量级估算"><div class="narrow tool-shell"><header class="tool-head"><p class="eyebrow">只估量级，不替你报税</p><h1>离境日先给资产拍一张快照</h1><p class="lede">输入资产的离境日公允市值与调整后成本。本工具算视同处置毛资本利得和按你输入比例估出的应税部分，不处理汇率、亏损限制、公司、信托或协定。</p></header><form class="panel fields" data-departure-form>
+  <div class="field"><label for="assets">资产 JSON</label><textarea id="assets" name="assets" spellcheck="false">{JSON.stringify([{name:'非注册证券',fmv:100000,cost:60000,excluded:false}])}</textarea><small class="help">每项：name、fmv、cost、excluded。注册账户、加拿大房地产等不能只靠本工具判断；确认排除后才勾 excluded。</small></div>
+  <div class="field"><label for="inclusion">假设的资本利得应税比例（只作情景输入）</label><input id="inclusion" name="inclusion" type="number" min="0" max="1" step="0.01" value="0.5" /></div>
+  <div class="field"><label for="rate">假设的边际税率</label><input id="rate" name="rate" type="number" min="0" max="1" step="0.01" value="0.4" /></div>
+  <button type="submit">估算量级</button><div class="warning" data-departure-result role="status">尚未计算。</div>
+  <p class="help" data-rule={reportThreshold.id}>公允市值总额超过 {reportThreshold.value.toLocaleString('zh-CN')} 加元时会显示 T1161 信号。选择延付且相关联邦税额超过 {securityThreshold.value.toLocaleString('zh-CN')} 加元时会显示担保信号。</p>
+</form></div><script define:vars={{ t1161: reportThreshold.value, security: securityThreshold.value }}>
+  const form = document.querySelector('[data-departure-form]');
+  const money = n => new Intl.NumberFormat('zh-CN',{style:'currency',currency:'CAD'}).format(n);
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault(); try {
+      const assets = JSON.parse(form.assets.value); const included = assets.filter(x => !x.excluded);
+      const totalFmv = assets.reduce((s,x)=>s+Number(x.fmv||0),0); const gain = included.reduce((s,x)=>s+Math.max(0,Number(x.fmv||0)-Number(x.cost||0)),0);
+      const taxable = gain * Number(form.inclusion.value); const tax = taxable * Number(form.rate.value);
+      const forms = [totalFmv > t1161 ? '出现 T1161 申报信号' : '未越过 T1161 金额信号', '视同处置用 T1243 逐项核', tax > security ? '如选择延付，出现联邦税担保信号' : '按本情景未出现联邦税担保信号'];
+      form.querySelector('[data-departure-result]').textContent = `资产公允市值 ${money(totalFmv)}；毛资本利得 ${money(gain)}；情景应税资本利得 ${money(taxable)}；情景税额 ${money(tax)}。${forms.join('；')}。`;
+    } catch(error) { form.querySelector('[data-departure-result]').textContent = `请检查 JSON：${error.message}`; }
+  });
+</script></Base>

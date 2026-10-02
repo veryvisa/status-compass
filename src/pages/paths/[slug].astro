@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import audiences from '../../../data/audiences.json';
+import { href } from '../../lib/site.mjs';
+export function getStaticPaths() { return audiences.map((path) => ({ params: { slug: path.slug }, props: { path } })); }
+const { path } = Astro.props;
+---
+<Base title={path.label}><div class="narrow"><header class="path-hero"><p class="eyebrow">{path.kicker}</p><h1>{path.label}</h1><p class="lede">{path.conclusion}</p></header><section><h2>按这个顺序做</h2><ol class="steps">{path.actions.map((action) => <li>{action}</li>)}</ol></section><section class="section"><div class="warning"><h2>什么时候不要自己猜</h2><p>{path.professional}</p></div></section><section class="section"><h2>继续读真实问题</h2><p>论坛长文保留背景、争议与读者讨论；工具站只负责把你送到正确入口。</p><ul>{path.forums.map((tid) => <li><a href={`https://bbs.fcgvisa.com/t/${tid}`}>论坛主题 t/{tid}</a></li>)}</ul></section><p><a href={href('paths/')}>← 换一种处境</a></p></div></Base>

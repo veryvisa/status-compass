@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import cases from '../../tests/cases.json';
+import { rule } from '../lib/rules.mjs';
+const prDays = rule('pr.required_days');
+const citDays = rule('citizenship.required_days');
+---
+<Base title="怎么算的"><div class="wrap tool-shell"><header class="tool-head"><p class="eyebrow">边界公开，样例与测试共用</p><h1>每一天怎么算，哪里故意不替你算</h1><p class="lede">本站显示规划估算；正式申请仍应使用 IRCC 官方计算器并保存结果。下面的样例直接来自自动测试，不另写一套“看起来对”的演示数字。</p></header>
+  <section class="section stack"><h2>共同日历口径</h2><p>所有日期先转成不带时刻的加拿大日历日。离境日与返加日都视为在加拿大；同日往返不扣天。仍在境外时，从离境翌日起扣到计算日。跨时区飞行如造成护照、CBSA 与机票日期不一致，应以申请表要求和官方记录复核。</p><p>标记为“陪同公民”“加拿大企业境外全职”等例外的行程仍先按缺席扣除。只有用户看过证据要求后，才可在正式申请中主张；第一版工具不自动加回。</p></section>
+  <section class="section stack"><h2>PR 五年尺</h2><p data-rule={prDays.id}>成为 PR 已满五年者看滚动五年窗口；未满五年者从成为 PR 当日累计，并另看首个五年结束前是否仍可能达到 {prDays.value} 日。枫叶卡到期不等于 PR 身份自动消失，工具也不作丧失身份认定。</p><h2>入籍五年尺</h2><p data-rule={citDays.id}>签署申请日不计入；PR 后实际在加日按整天，资格期内合资格的 PR 前时间按规则折算并受上限约束。达到 {citDays.value} 日仍不等于可递交，还要核报税、语言、考试与禁限情形。</p><h2>税务、医保与 OAS</h2><p>税务尺只报告当年在加天数和 183 日信号；居民身份主要看居所联系与协定。医保尺先显示 BC 或 Ontario 的实际居住信号，不自动批准长期离境例外。OAS 只估十八岁后的加拿大居住年数，不把中加有限社保协定误当成年限累计协定。</p></section>
+  <section class="section"><h2>与 IRCC 官方计算器的差异</h2><div class="grid"><article class="card"><h3>本站多算五套系统</h3><p>优点是能看到哪个节点先到；代价是不能替任何主管机构作正式认定。</p></article><article class="card"><h3>本站不自动认例外</h3><p>官方申请会收证据并由官员判断；本站把争议留给证据与专业审查。</p></article><article class="card"><h3>本站记录可导出</h3><p>导出的是你输入的 JSON，不是 IRCC 计算结果，也不应当作官方收据。</p></article></div></section>
+  <section class="section"><h2>已知答案样例（{cases.length} 个）</h2><table><thead><tr><th>样例</th><th>边界</th><th>预期断言</th></tr></thead><tbody>{cases.map((sample)=><tr><td><code>{sample.id}</code></td><td>{sample.note}</td><td>{Object.entries(sample.expected).map(([key,value])=>`${key}=${value}`).join('；')}</td></tr>)}</tbody></table></section>
+</div></Base>

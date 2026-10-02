@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { rule } from '../../lib/rules.mjs';
+const gis = rule('gis.absence_months');
+const oas = rule('oas.minimum_years_abroad');
+const bc = rule('msp.vacation_absence_months');
+const on = rule('ohip.regular_absence_months');
+---
+<Base title="福利与医保离境影响器"><div class="narrow tool-shell"><header class="tool-head"><p class="eyebrow">一项一项看，不打包判断</p><h1>离开多久，什么先变化？</h1><p class="lede">输入预计离境时长与家庭情况，得到通知与核查清单。金额不是本工具的重点，资格也不会被一句“仍是 PR”自动保住。</p></header><form class="panel fields" data-benefit-form>
+  <div class="field"><label for="months">预计连续离境月数</label><input id="months" name="months" type="number" min="0" max="120" step="0.5" value="1" required /></div>
+  <div class="field"><label for="province">现有省医保</label><select id="province" name="province"><option value="bc">BC MSP</option><option value="on">Ontario OHIP</option><option value="other">其他省区（只列核查提醒）</option></select></div>
+  <label><input type="checkbox" name="gis" /> 正在领 GIS</label><label><input type="checkbox" name="oas" /> 正在领 OAS</label><label><input type="checkbox" name="ccb" /> 家庭正在领 CCB</label>
+  <button type="submit">生成离境前清单</button><ul class="result-list" data-benefit-result aria-live="polite"><li>填完后会按项目列出影响。</li></ul>
+  <p class="help">CPP 养老金通常不是按短期离境停发，但本站第一版不自动判断；GST/HST 抵免的具体离境时点仍在待核规则中，因此不会显示结论。</p>
+</form></div><script define:vars={{ gisMonths: gis.value, oasYears: oas.value, bcMonths: bc.value, onMonths: on.value }}>
+  const form = document.querySelector('[data-benefit-form]');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault(); const months = Number(form.months.value); const rows = [];
+    if (form.gis.checked) rows.push(months > gisMonths ? 'GIS：超过规则节点，出发前通知 Service Canada，并准备停止与重启安排。' : 'GIS：尚未越过本工具节点；实际日期与付款月仍须向 Service Canada 确认。');
+    if (form.oas.checked) rows.push(`OAS：海外继续领取通常要核十八岁后在加居住年数；关键门槛是 ${oasYears} 年，GIS 不能跟着 OAS 一并推断。`);
+    if (form.ccb.checked) rows.push('CCB：核孩子是否仍与你同住、你是否仍为加拿大税务居民、家庭与身份条件是否变化，并及时通知 CRA。');
+    const limit = form.province.value === 'bc' ? bcMonths : onMonths;
+    rows.push(form.province.value === 'other' ? '省医保：请向所在省区确认实际居住要求与长期离境审批。' : `${form.province.value === 'bc' ? 'BC MSP' : 'Ontario OHIP'}：${months > limit ? '预计越过通常离境范围，出发前必须申请或确认。' : '未越过通常月份信号，仍要核日历年／十二个月口径与例外。'}`);
+    form.querySelector('[data-benefit-result]').innerHTML = rows.map(x => `<li>${x}</li>`).join('');
+  });
+</script></Base>

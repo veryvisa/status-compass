@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import audiences from '../../data/audiences.json';
+import { href } from '../lib/site.mjs';
+---
+<Base>
+  <div class="wrap">
+    <section class="hero">
+      <div><p class="eyebrow">身份 × 税务 × 福利 × 长远规划</p><h1>一次填记录，<br />看清哪一把尺子先到线。</h1><p class="lede">PR、入籍、税务、省医保和 OAS 各有自己的“居住”定义。枫居罗盘把它们放在同一张未来五年时间线上，帮你决定先查什么、先做什么。</p><div class="actions"><a class="button" href={href('tools/day-ledger/')}>打开天数总账</a><a class="button secondary" href="#situations">按我的情况找路</a></div></div>
+      <div class="compass-card" aria-label="一份记录，五把尺子"><strong>一份出入境记录<br /><span>五把尺子</span><br />一张未来时间线</strong></div>
+    </section>
+    <section class="warning"><strong>你的日期不会离开浏览器。</strong> 所有计算都在当前页面本地完成。本站不给“你是或不是税务居民”的个案结论，也不自动把有争议的境外例外算进去。</section>
+    <section class="section" id="situations"><div class="section-head"><div><p class="eyebrow">先认出自己</p><h2>你现在是哪种情况？</h2></div><p>目录让人找知识，处境才能把人带到下一步。</p></div><div class="grid">{audiences.map((item) => <article class="card"><span class="tag">{item.kicker}</span><h3>{item.label}</h3><p>{item.conclusion}</p><a class="stretch" href={href(`paths/${item.slug}/`)}>看我的三步路径 →</a></article>)}</div></section>
+    <section class="section"><div class="section-head"><div><p class="eyebrow">六个本地工具</p><h2>把模糊的问题变成可核对的输入</h2></div></div><div class="grid">
+      <article class="card"><h3>天数总账</h3><p>一份行程同时量 PR、入籍、税务天数、省医保与 OAS。</p><a href={href('tools/day-ledger/')}>开始计算</a></article>
+      <article class="card"><h3>税务居民问卷</h3><p>把重要联系、次要联系、天数与协定冲突拆开。</p><a href={href('tools/tax-residency/')}>整理事实</a></article>
+      <article class="card"><h3>福利影响器</h3><p>离开多久，分别会碰到哪些通知或停止节点。</p><a href={href('tools/benefits/')}>看影响</a></article>
+      <article class="card"><h3>离境税估算</h3><p>先估量级与表格触发信号，再把高风险项目交给专业人士。</p><a href={href('tools/departure-tax/')}>试算资产</a></article>
+      <article class="card"><h3>三棵决策树</h3><p>续卡、PRTD、放弃；入籍或保持 PR；弃籍后的路。</p><a href={href('tools/decision-trees/')}>比较路径</a></article>
+      <article class="card"><h3>入籍考试练习</h3><p>按官方指南分章练习、限时模拟，错题只存在本机。</p><a href={href('citizenship-test/')}>进入题库</a></article>
+    </div></section>
+  </div>
+</Base>

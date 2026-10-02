@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="天数总账"><div class="wrap tool-shell"><header class="tool-head"><p class="eyebrow">核心工具 · 数据不离开浏览器</p><h1>同一份行程，量五把尺子</h1><p class="lede">出境日和返加日按 PR 与入籍常用口径视为在加拿大。同日往返不会扣天。境外例外只记录、不自动加回。</p></header><div class="tool-grid"><form class="panel fields" data-ledger-form>
+  <div class="field"><label for="prDate">成为 PR 的日期</label><input id="prDate" name="prDate" type="date" required /></div>
+  <div class="field"><label for="temporaryStart">合资格临时身份开始日（可空）</label><input id="temporaryStart" name="temporaryStart" type="date" /></div>
+  <div class="field"><label for="canadaStart">开始在加拿大通常居住的日期</label><input id="canadaStart" name="canadaStart" type="date" required /></div>
+  <div class="field"><label for="birthDate">出生日期（仅用于 OAS 十八岁后年数）</label><input id="birthDate" name="birthDate" type="date" /></div>
+  <div class="field"><label for="asOf">计算日／拟签署日</label><input id="asOf" name="asOf" type="date" required value="2026-10-01" /></div>
+  <div class="field"><label for="province">医保尺</label><select id="province" name="province"><option value="bc">BC MSP</option><option value="on">Ontario OHIP</option></select></div>
+  <fieldset class="field"><legend>手填一段行程</legend><label>离境日 <input name="newDeparture" type="date" /></label><label>返加日（仍在境外可空） <input name="newReturn" type="date" /></label><label><input name="newException" type="checkbox" /> 标注“可能主张例外”（不会自动加回）</label><button class="secondary" type="button" data-add-trip>加入记录</button></fieldset>
+  <div class="field"><label for="trips">行程粘贴区</label><textarea id="trips" name="trips" spellcheck="false" placeholder={'可粘贴 JSON，或每行：\n2025-03-01,2025-04-01\n2026-08-01,,例外'}>[]</textarea><small class="help">支持 JSON，或每行“离境日,返加日,例外”。每段需要 departure；exception 只作标注。</small></div>
+  <div class="actions"><button type="submit">计算五把尺子</button><button class="secondary" type="button" data-sample>载入示例</button><button class="secondary" type="button" data-export>导出 JSON</button><label class="button secondary">导入 JSON<input class="sr-only" type="file" accept="application/json" data-import /></label></div><p class="help" data-ledger-status role="status">尚未计算。</p>
+</form><section class="panel stack" aria-live="polite"><h2>结果与未来五年</h2><div data-ledger-results><p>填入日期后，五把尺子会在这里并排出现。</p></div><div class="warning"><strong>183 天只是信号。</strong> 税务居民仍以居所联系、协定和完整事实判断；本页绝不输出“你是／不是税务居民”。</div></section></div><section class="section"><p><a href="/status-compass/how-it-works/">查看每一天怎么算、边界如何处理，以及与 IRCC 官方计算器的差异 →</a></p></section></div><script src="../../scripts/day-ledger.mjs"></script></Base>

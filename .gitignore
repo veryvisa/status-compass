@@ -1,0 +1,5 @@
+node_modules/
+.astro/
+dist/
+reports/theme-report.json
+*.log

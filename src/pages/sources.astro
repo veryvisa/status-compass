@@ -1,0 +1,6 @@
+---
+import Base from '../layouts/Base.astro';
+import { rules } from '../lib/rules.mjs';
+const verified = rules.filter((item) => item.status === 'verified');
+---
+<Base title="规则与官方来源"><div class="wrap tool-shell"><header class="tool-head"><p class="eyebrow">规则单一源</p><h1>每个数字都能回到主管机构</h1><p class="lede">公开页只列 verified 条目。pending 条目保留在规则库供下一轮核读，但构建门不允许页面引用。</p></header><table><thead><tr><th>规则</th><th>本站表述</th><th>值</th><th>状态</th><th>核读日</th></tr></thead><tbody>{verified.map((item)=><tr><td><code>{item.id}</code></td><td>{item.claim}<br/><a data-source="official" href={item.source_url}>官方原文</a></td><td>{typeof item.value === 'object' ? JSON.stringify(item.value) : String(item.value)}</td><td>{item.status}</td><td>{item.checked_at}</td></tr>)}</tbody></table></div></Base>
