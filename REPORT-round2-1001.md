@@ -41,7 +41,7 @@ npm run quiz:crosscheck -- <回答文件一.json> <回答文件二.json>
 
 `python3 bin/preflight.py` 退出码 0。`npm run check` 退出码 0，输出为 57 条规则、55 条 verified、2 条 pending、135 道题、50 项测试通过、20 页构建完成；发布门确认 pending 引用 0、外发 form 0、客户端网络 API 0、静态移动端溢出风险 0。
 
-源码 `main` 已推至 `0e0258f578e52c4439a3cdf6dd7c821a4d925ba5`；GitHub Pages 部署提交为 `19470eb2414fc2d34c641b44e6e180c12d864da4`。Pages API 显示该提交构建完成。带缓存破除参数读回首页、天数总账、“怎么算的”和来源页均为 HTTP 200；线上 HTML 已读到“家庭天数总账”“CBSA Traveller History 手动列导入”“OAS 只显示天数线索，不换算小数年”和“本规则自 2026-10-01 起”。
+六项功能源码锚点为 `0e0258f578e52c4439a3cdf6dd7c821a4d925ba5`；GitHub Pages 部署提交为 `19470eb2414fc2d34c641b44e6e180c12d864da4`。Pages API 显示该提交构建完成。带缓存破除参数读回首页、天数总账、“怎么算的”和来源页均为 HTTP 200；线上 HTML 已读到“家庭天数总账”“CBSA Traveller History 手动列导入”“OAS 只显示天数线索，不换算小数年”和“本规则自 2026-10-01 起”。
 
 本轮尝试用 Ego Lite 做线上浏览器交互验收时，真实失败为 `Failed to connect to ego_cli bootstrap`，并伴随 macOS HIServices 错误。因此本报告只确认自动测试、构建门、Pages 构建与 HTTP/页面语义读回，不把线上 Chromium 交互冒充为已验证。
 
