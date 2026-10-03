@@ -1,0 +1,1576 @@
+{
+  "schema_version": 1,
+  "rules_file": "data/rules.json",
+  "rules_sha256": "5151ed84954375ab1d226f7489323fa1213e2e23a42c02f6a9719ca1cdb42ea8",
+  "as_of": "2026-10-03",
+  "max_age_days": 30,
+  "policy": {
+    "due_boundary": "age_days >= max_age_days",
+    "meaning": "The maintenance interval identifies local reread candidates; it is not a legal-validity period.",
+    "date_field": "Only checked_at is used. effective_from is never substituted.",
+    "mutation": "This report does not change rule status, verified state, or value.",
+    "primary_category_precedence": [
+      "pending",
+      "missing_source",
+      "missing_checked_at",
+      "invalid_checked_at",
+      "future_checked_at",
+      "due",
+      "current"
+    ]
+  },
+  "counts": {
+    "input_rules": 173,
+    "categorized_rules": 173,
+    "category_rules": {
+      "pending": 2,
+      "missing_source": 0,
+      "missing_checked_at": 0,
+      "invalid_checked_at": 0,
+      "future_checked_at": 0,
+      "due": 0,
+      "current": 171
+    },
+    "due_sources": 0,
+    "current_sources": 70
+  },
+  "categories": {
+    "due": [],
+    "current": [
+      {
+        "source_url": "https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193028/content.html",
+        "rule_ids": [
+          "china.iit.resident_183",
+          "cn_iit.resident_test"
+        ],
+        "rules": [
+          {
+            "rule_id": "china.iit.resident_183",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "cn_iit.resident_test",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://ga.sz.gov.cn/JMHD/YWZSK/CRJGL_ZS/content/post_10578929.html",
+        "rule_ids": [
+          "china.hukou.cancel_after_foreign_nationality"
+        ],
+        "rules": [
+          {
+            "rule_id": "china.hukou.cancel_after_foreign_nationality",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://ircc.canada.ca/english/information/applications/guides/5781etoc.asp",
+        "rule_ids": [
+          "fee.renounce_pr"
+        ],
+        "rules": [
+          {
+            "rule_id": "fee.renounce_pr",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://ircc.canada.ca/english/information/fees/fees.asp",
+        "rule_ids": [
+          "fee.citizenship_adult",
+          "fee.citizenship_minor",
+          "fee.pr_card",
+          "fee.prtd",
+          "fee.renounce_citizenship",
+          "fee.resume_citizenship_adult",
+          "fee.right_of_citizenship",
+          "fee.trv"
+        ],
+        "rules": [
+          {
+            "rule_id": "fee.citizenship_adult",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.citizenship_minor",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.pr_card",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.prtd",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.renounce_citizenship",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.resume_citizenship_adult",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.right_of_citizenship",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "fee.trv",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/I-3.3/section-38.html",
+        "rule_ids": [
+          "departure_tax.capital_gain_inclusion"
+        ],
+        "rules": [
+          {
+            "rule_id": "departure_tax.capital_gain_inclusion",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/c-29/section-22.1.html",
+        "rule_ids": [
+          "citizenship.jr_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.jr_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/c-29/section-9.html",
+        "rule_ids": [
+          "citizenship.renounce_effective"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.renounce_effective",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-31.html",
+        "rule_ids": [
+          "irpa.prtd_365_presence"
+        ],
+        "rules": [
+          {
+            "rule_id": "irpa.prtd_365_presence",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-46.html",
+        "rule_ids": [
+          "irpa.renounce_pr_temp_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "irpa.renounce_pr_temp_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-72.html",
+        "rule_ids": [
+          "irpa.jr_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "irpa.jr_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-277/FullText.html",
+        "rule_ids": [
+          "iad.removal_order_appeal_days",
+          "iad.residency_appeal_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "iad.removal_order_appeal_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "iad.residency_appeal_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://ru.china-embassy.gov.cn/zfhz_0/zgflyd_142850/202504/t20250430_11612072.htm",
+        "rule_ids": [
+          "china.nationality.auto_loss",
+          "china.nationality.no_dual",
+          "china.nationality.restore"
+        ],
+        "rules": [
+          {
+            "rule_id": "china.nationality.auto_loss",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "china.nationality.no_dual",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "china.nationality.restore",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/content/dam/ircc/migration/ircc/english/resources/manuals/enf/enf23-eng.pdf",
+        "rule_ids": [
+          "pr.exception.accompanying_pr_worker",
+          "pr.exception.canadian_business",
+          "pr.exception.citizen_family"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.exception.accompanying_pr_worker",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "pr.exception.canadian_business",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "pr.exception.citizen_family",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/department-finance/programs/tax-policy/tax-treaties/country/china-agreement-1986.html",
+        "rule_ids": [
+          "treaty_cn.art10_dividend_company",
+          "treaty_cn.art10_dividend_general",
+          "treaty_cn.art11_interest",
+          "treaty_cn.art12_royalties",
+          "treaty_cn.art13_5_other_gains",
+          "treaty_cn.art20_other_income",
+          "treaty_cn.art21_credit_canada",
+          "treaty_cn.art23_map",
+          "treaty_cn.art4_tiebreaker",
+          "treaty_cn.signed"
+        ],
+        "rules": [
+          {
+            "rule_id": "treaty_cn.art10_dividend_company",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art10_dividend_general",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art11_interest",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art12_royalties",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art13_5_other_gains",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art20_other_income",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art21_credit_canada",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art23_map",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.art4_tiebreaker",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "treaty_cn.signed",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/employment-social-development/programs/old-age-security/reports/oas-toolkit.html",
+        "rule_ids": [
+          "gis.abroad_stop_regardless",
+          "oas.abroad_under20_six_months",
+          "oas.full_years",
+          "oas.partial_rate"
+        ],
+        "rules": [
+          {
+            "rule_id": "gis.abroad_stop_regardless",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.abroad_under20_six_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.full_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.partial_rate",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/application-voluntarily-renounce-permanent-resident-status.html",
+        "rule_ids": [
+          "pr.renounce_checklist"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.renounce_checklist",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-0302-application-renounce-canadian-citizenship-subsection-9-1.html",
+        "rule_ids": [
+          "citizenship.renounce_form"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.renounce_form",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html",
+        "rule_ids": [
+          "pr.window_years",
+          "prcard.docs_threshold",
+          "prcard.photo_age",
+          "prcard.renew_max_remaining",
+          "prcard.urgent_window"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.window_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prcard.docs_threshold",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prcard.photo_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prcard.renew_max_remaining",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prcard.urgent_window",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5529-applying-permanent-resident-travel-document.html",
+        "rule_ids": [
+          "prtd.china_exit_entry",
+          "prtd.hc_question",
+          "prtd.hc_review",
+          "prtd.required_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "prtd.china_exit_entry",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prtd.hc_question",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prtd.hc_review",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "prtd.required_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/imm5444.html",
+        "rule_ids": [
+          "pr.departure_return_count"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.departure_return_count",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/imm5782.html",
+        "rule_ids": [
+          "pr.renounce_form"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.renounce_form",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/after.html",
+        "rule_ids": [
+          "citizenship.after.notify_absence",
+          "citizenship.after.reply_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.after.notify_absence",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.after.reply_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/how/adult-forms-documents.html",
+        "rule_ids": [
+          "citizenship.forms_paper",
+          "citizenship.lang.celpip",
+          "citizenship.lang.french",
+          "citizenship.lang.ielts",
+          "citizenship.lang.pte"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.forms_paper",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.lang.celpip",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.lang.french",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.lang.ielts",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.lang.pte",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/how/physical-presence.html",
+        "rule_ids": [
+          "citizenship.presence_form"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.presence_form",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html",
+        "rule_ids": [
+          "citizenship.custody_not_counted",
+          "citizenship.language_level",
+          "citizenship.min_pr_days",
+          "citizenship.minor_5_1_days",
+          "citizenship.pre_pr_factor",
+          "citizenship.pre_pr_max",
+          "citizenship.required_days",
+          "citizenship.tax_years",
+          "citizenship.test_age_range",
+          "citizenship.window_years"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.custody_not_counted",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.language_level",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.min_pr_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.minor_5_1_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.pre_pr_factor",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.pre_pr_max",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.required_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.tax_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test_age_range",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.window_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/language-proof.html",
+        "rule_ids": [
+          "citizenship.language_max_age",
+          "citizenship.language_min_age"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.language_max_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.language_min_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/renounce-canadian-citizenship/eligibility.html",
+        "rule_ids": [
+          "citizenship.renounce_min_age",
+          "citizenship.renounce_other_citizenship",
+          "citizenship.renounce_outside_canada"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.renounce_min_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.renounce_other_citizenship",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.renounce_outside_canada",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/how-it-works.html",
+        "rule_ids": [
+          "citizenship.test.window_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.test.window_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/invitation.html",
+        "rule_ids": [
+          "citizenship.test.invite_months",
+          "citizenship.test.reschedule_weeks"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.test.invite_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test.reschedule_weeks",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/missed.html",
+        "rule_ids": [
+          "citizenship.test.missed_contact_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.test.missed_contact_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/online.html",
+        "rule_ids": [
+          "citizenship.test.link_minutes",
+          "citizenship.test.warning_minutes"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.test.link_minutes",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test.warning_minutes",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html",
+        "rule_ids": [
+          "citizenship.hearing.duration",
+          "citizenship.hearing.knowledge",
+          "citizenship.hearing.language"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.hearing.duration",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.hearing.knowledge",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.hearing.language",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/study.html",
+        "rule_ids": [
+          "citizenship.study_guide",
+          "citizenship.test_attempts",
+          "citizenship.test_minutes",
+          "citizenship.test_pass",
+          "citizenship.test_questions"
+        ],
+        "rules": [
+          {
+            "rule_id": "citizenship.study_guide",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test_attempts",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test_minutes",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test_pass",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "citizenship.test_questions",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/status.html",
+        "rule_ids": [
+          "pr.card_expiry_not_status_loss",
+          "pr.required_days",
+          "pr.status_loss_ways"
+        ],
+        "rules": [
+          {
+            "rule_id": "pr.card_expiry_not_status_loss",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "pr.required_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "pr.status_loss_ways",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/voluntary-disclosures-program/changes-vdp.html",
+        "rule_ids": [
+          "vdp.foreign_years",
+          "vdp.relief_unprompted"
+        ],
+        "rules": [
+          {
+            "rule_id": "vdp.foreign_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "vdp.relief_unprompted",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html",
+        "rule_ids": [
+          "cgeb.renamed"
+        ],
+        "rules": [
+          {
+            "rule_id": "cgeb.renamed",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gsthstc-eligibility.html",
+        "rule_ids": [
+          "cgeb.residency_timing"
+        ],
+        "rules": [
+          {
+            "rule_id": "cgeb.residency_timing",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/nr301.html",
+        "rule_ids": [
+          "nonres.nr301"
+        ],
+        "rules": [
+          {
+            "rule_id": "nonres.nr301",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/nr73.html",
+        "rule_ids": [
+          "tax.nr73"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.nr73",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/p148/p148-resolving-your-dispute-objection-appeal-rights-under-income-tax-act.html",
+        "rule_ids": [
+          "tax.objection_deadline_individual"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.objection_deadline_individual",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4114/canada-child-benefit.html",
+        "rule_ids": [
+          "ccb.child_max_age",
+          "ccb.tax_resident",
+          "ccb.temporary_resident_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "ccb.child_max_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "ccb.tax_resident",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "ccb.temporary_resident_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4155/t4155-old-security-return-income-guide-non-residents.html",
+        "rule_ids": [
+          "oas.oasri_exempt_list_no_china"
+        ],
+        "rules": [
+          {
+            "rule_id": "oas.oasri_exempt_list_no_china",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/change-your-return.html",
+        "rule_ids": [
+          "tax.adjust_refund_limit"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.adjust_refund_limit",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/tax-free-savings-account/owing-tax/non-resident.html",
+        "rule_ids": [
+          "tfsa.nonresident_contribution_tax"
+        ],
+        "rules": [
+          {
+            "rule_id": "tfsa.nonresident_contribution_tax",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/deemed-residents.html",
+        "rule_ids": [
+          "tax.deemed_resident_days",
+          "tax.significant_ties"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.deemed_resident_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.significant_ties",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/dispositions-property.html",
+        "rule_ids": [
+          "departure_tax.deferred_payment_due",
+          "departure_tax.excluded_property",
+          "departure_tax.security_threshold",
+          "departure_tax.security_threshold_quebec",
+          "departure_tax.short_term_resident",
+          "departure_tax.short_term_resident_60_months",
+          "departure_tax.t1161_penalty",
+          "departure_tax.t1161_personal_use_exclusion",
+          "departure_tax.t1243",
+          "departure_tax.t1244",
+          "departure_tax.t1244_deadline",
+          "departure_tax.t2061a",
+          "departure_tax.unwind"
+        ],
+        "rules": [
+          {
+            "rule_id": "departure_tax.deferred_payment_due",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.excluded_property",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.security_threshold",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.security_threshold_quebec",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.short_term_resident",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.short_term_resident_60_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1161_penalty",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1161_personal_use_exclusion",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1243",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1244",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1244_deadline",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t2061a",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.unwind",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/leaving-canada-emigrants.html",
+        "rule_ids": [
+          "benefits.emigrant_ccb_cgeb",
+          "cra.emigrant.no_ccb",
+          "cra.emigrant.nonresident_date",
+          "departure_tax.deemed_disposition",
+          "departure_tax.t1161_threshold",
+          "tax.deemed_nonresident_same_rules",
+          "tax.emigrant_nonresident_date",
+          "tfsa.nonresident_no_contribution"
+        ],
+        "rules": [
+          {
+            "rule_id": "benefits.emigrant_ccb_cgeb",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "cra.emigrant.no_ccb",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "cra.emigrant.nonresident_date",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.deemed_disposition",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "departure_tax.t1161_threshold",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.deemed_nonresident_same_rules",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.emigrant_nonresident_date",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tfsa.nonresident_no_contribution",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html",
+        "rule_ids": [
+          "cra.newcomer.resident_start"
+        ],
+        "rules": [
+          {
+            "rule_id": "cra.newcomer.resident_start",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants/completing-return-newcomers.html",
+        "rule_ids": [
+          "tax.immigrant_deemed_acquisition",
+          "tax.part_year_90pct",
+          "tax.part_year_world_income"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.immigrant_deemed_acquisition",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.part_year_90pct",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.part_year_world_income",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/non-residents-canada.html",
+        "rule_ids": [
+          "nonres.arm_length_interest",
+          "nonres.part_xiii_rate"
+        ],
+        "rules": [
+          {
+            "rule_id": "nonres.arm_length_interest",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "nonres.part_xiii_rate",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-form-t1135.html",
+        "rule_ids": [
+          "t1135.emigrant_period",
+          "t1135.first_year_exempt",
+          "t1135.simplified_limit",
+          "t1135.threshold"
+        ],
+        "rules": [
+          {
+            "rule_id": "t1135.emigrant_period",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "t1135.first_year_exempt",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "t1135.simplified_limit",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "t1135.threshold",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-penalties.html",
+        "rule_ids": [
+          "t1135.gross_negligence_penalty"
+        ],
+        "rules": [
+          {
+            "rule_id": "t1135.gross_negligence_penalty",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/table-penalties.html",
+        "rule_ids": [
+          "t1135.late_penalty"
+        ],
+        "rules": [
+          {
+            "rule_id": "t1135.late_penalty",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/income-tax/income-tax-folios-index/series-5-international-residency/folio-1-residency/income-tax-folio-s5-f1-c1-determining-individual-s-residence-status.html",
+        "rule_ids": [
+          "tax.folio_secondary_ties",
+          "tax.part_day_counts"
+        ],
+        "rules": [
+          {
+            "rule_id": "tax.folio_secondary_ties",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "tax.part_day_counts",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/apply.html",
+        "rule_ids": [
+          "cpp.apply_from_abroad"
+        ],
+        "rules": [
+          {
+            "rule_id": "cpp.apply_from_abroad",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-benefit/eligibility.html",
+        "rule_ids": [
+          "cpp.eligibility"
+        ],
+        "rules": [
+          {
+            "rule_id": "cpp.eligibility",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/china.html",
+        "rule_ids": [
+          "canada_china_agreement.oas_totalization",
+          "canada_china_agreement.scope",
+          "cn_ssa.in_force"
+        ],
+        "rules": [
+          {
+            "rule_id": "canada_china_agreement.oas_totalization",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "canada_china_agreement.scope",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "cn_ssa.in_force",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/while-receiving.html",
+        "rule_ids": [
+          "cpp.foreign_currency_list"
+        ],
+        "rules": [
+          {
+            "rule_id": "cpp.foreign_currency_list",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/benefit-amount.html",
+        "rule_ids": [
+          "oas.minimum_years_abroad",
+          "oas.minimum_years_canada"
+        ],
+        "rules": [
+          {
+            "rule_id": "oas.minimum_years_abroad",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.minimum_years_canada",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/eligibility.html",
+        "rule_ids": [
+          "oas.abroad_legal_status",
+          "oas.abroad_status_day_before",
+          "oas.annual_tax_return",
+          "oas.min_age"
+        ],
+        "rules": [
+          {
+            "rule_id": "oas.abroad_legal_status",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.abroad_status_day_before",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.annual_tax_return",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.min_age",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/recovery-tax.html",
+        "rule_ids": [
+          "oas.oasri_deadline",
+          "oas.recovery_threshold_2025"
+        ],
+        "rules": [
+          {
+            "rule_id": "oas.oasri_deadline",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.recovery_threshold_2025",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/while-receiving.html",
+        "rule_ids": [
+          "gis.absence_months",
+          "oas.abroad_stop_6_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "gis.absence_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "oas.abroad_stop_6_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.chinatax.gov.cn/n810356/n3255681/c4251584/content.html",
+        "rule_ids": [
+          "cn_iit.domicile"
+        ],
+        "rules": [
+          {
+            "rule_id": "cn_iit.domicile",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.ontario.ca/document/resources-for-physicians/registration-ontario-health-insurance-coverage",
+        "rule_ids": [
+          "ohip.regular_absence_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "ohip.regular_absence_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.ontario.ca/page/apply-ohip-and-get-health-card",
+        "rule_ids": [
+          "ohip.initial_presence_days",
+          "ohip.no_waiting_period",
+          "ohip.presence_days"
+        ],
+        "rules": [
+          {
+            "rule_id": "ohip.initial_presence_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "ohip.no_waiting_period",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "ohip.presence_days",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.ontario.ca/page/ohip-coverage-while-outside-canada",
+        "rule_ids": [
+          "ohip.special_absence_years",
+          "ohip.two_year_absence_conditions"
+        ],
+        "rules": [
+          {
+            "rule_id": "ohip.special_absence_years",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "ohip.two_year_absence_conditions",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www2.gov.bc.ca/assets/gov/health/practitioner-pro/medical-services-plan/group-procedure-guide.pdf",
+        "rule_ids": [
+          "msp.extended_absence_months",
+          "msp.vacation_absence_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "msp.extended_absence_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          },
+          {
+            "rule_id": "msp.vacation_absence_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/are-you-eligible",
+        "rule_ids": [
+          "msp.presence_months"
+        ],
+        "rules": [
+          {
+            "rule_id": "msp.presence_months",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/managing-your-msp-account/leaving-bc-permanently",
+        "rule_ids": [
+          "msp.leave_permanent_outside_canada"
+        ],
+        "rules": [
+          {
+            "rule_id": "msp.leave_permanent_outside_canada",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      },
+      {
+        "source_url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/managing-your-msp-account/leaving-bc-temporarily",
+        "rule_ids": [
+          "msp.extended_absence_conditions"
+        ],
+        "rules": [
+          {
+            "rule_id": "msp.extended_absence_conditions",
+            "checked_at": "2026-10-01",
+            "age_days": 2
+          }
+        ]
+      }
+    ],
+    "pending": [
+      {
+        "rule_id": "pending.cpp_abroad",
+        "status": "pending",
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp.html",
+        "checked_at": "2026-10-01"
+      },
+      {
+        "rule_id": "pending.gst_credit_absence",
+        "status": "pending",
+        "source_url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gsthstc.html",
+        "checked_at": "2026-10-01"
+      }
+    ],
+    "missing_checked_at": [],
+    "invalid_checked_at": [],
+    "future_checked_at": [],
+    "missing_source": []
+  }
+}
