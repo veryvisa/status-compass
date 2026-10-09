@@ -10,17 +10,47 @@ export function parseQuizAnswers(text, label = 'answers') {
   if (!trimmed) throw new Error(`${label}: 答案文件为空`);
   const answers = new Map();
   const add = (id, value, row) => {
+    if (id === undefined) throw new Error(`${label}: ${row} 缺少非空题号`);
+    if (typeof id !== 'string') throw new Error(`${label}: ${row} 的题号必须是字符串`);
+    const normalizedId = id.trim();
+    if (!normalizedId) throw new Error(`${label}: ${row} 缺少非空题号`);
+    if (normalizedId !== id) throw new Error(`${label}: ${row} 的题号不能含首尾空白`);
     const choice = normalizeChoice(value);
     if (!choice) throw new Error(`${label}: ${row} 的选项必须是 A-D 或 1-4`);
-    if (answers.has(String(id))) throw new Error(`${label}: 题号重复 ${id}`);
-    answers.set(String(id), choice);
+    if (answers.has(normalizedId)) throw new Error(`${label}: ${row} 的题号重复 ${normalizedId}`);
+    answers.set(normalizedId, choice);
   };
   if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-    const parsed = JSON.parse(trimmed);
-    if (Array.isArray(parsed)) parsed.forEach((row, index) => add(row.id, row.answer ?? row.choice, `JSON 第 ${index + 1} 项`));
-    else Object.entries(parsed).forEach(([id, value]) => add(id, value, `JSON ${id}`));
+    let parsed;
+    try {
+      parsed = JSON.parse(trimmed);
+    } catch {
+      throw new Error(`${label}: JSON 格式无效`);
+    }
+    if (Array.isArray(parsed)) {
+      parsed.forEach((row, index) => {
+        const item = `JSON 第 ${index + 1} 项`;
+        if (row === null || typeof row !== 'object' || Array.isArray(row)) {
+          throw new Error(`${label}: ${item} 必须是含 id 和 answer 的对象`);
+        }
+        add(row.id, row.answer ?? row.choice, item);
+      });
+    } else {
+      if (parsed === null || typeof parsed !== 'object') {
+        throw new Error(`${label}: JSON 顶层必须是题号映射或答案对象数组`);
+      }
+      Object.entries(parsed).forEach(([id, value]) => add(id, value, `JSON 题号 ${JSON.stringify(id)}`));
+    }
     return answers;
   }
+  let scalarJson = false;
+  try {
+    JSON.parse(trimmed);
+    scalarJson = true;
+  } catch {
+    // Non-JSON input continues through the original line-oriented parser.
+  }
+  if (scalarJson) throw new Error(`${label}: JSON 顶层必须是题号映射或答案对象数组`);
   trimmed.split(/\r?\n/).forEach((line, index) => {
     const clean = line.trim();
     if (!clean || clean.startsWith('#')) return;
