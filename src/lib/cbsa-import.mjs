@@ -9,16 +9,85 @@ const HEADER = {
 };
 
 const clean = (value) => String(value || '').trim().toLowerCase();
-const split = (line, delimiter) => line.split(delimiter).map((part) => part.trim().replace(/^"|"$/g, ''));
+const DELIMITERS = ['\t', ';', ','];
 
-function detectDelimiter(line) {
-  if (line.includes('\t')) return '\t';
-  if (line.includes(';')) return ';';
+function delimiterCounts(line, row) {
+  const counts = new Map(DELIMITERS.map((delimiter) => [delimiter, 0]));
+  let state = 'start';
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (state === 'quoted') {
+      if (character !== '"') continue;
+      if (line[index + 1] === '"') index += 1;
+      else state = 'after-quote';
+      continue;
+    }
+    if (character === '"') {
+      if (state !== 'start') throw new Error(`第 ${row} 行引号位置无效`);
+      state = 'quoted';
+      continue;
+    }
+    if (DELIMITERS.includes(character)) {
+      counts.set(character, counts.get(character) + 1);
+      state = 'start';
+      continue;
+    }
+    if (/\s/.test(character) && (state === 'start' || state === 'after-quote')) continue;
+    if (state === 'after-quote') throw new Error(`第 ${row} 行引号后的字符无效`);
+    state = 'unquoted';
+  }
+  if (state === 'quoted') throw new Error(`第 ${row} 行引号未闭合；不支持字段内换行`);
+  return counts;
+}
+
+function detectDelimiter(line, row) {
+  const counts = delimiterCounts(line, row);
+  if (counts.get('\t')) return '\t';
+  if (counts.get(';')) return ';';
   return ',';
 }
 
-function headerIndex(parts, key) {
-  return parts.findIndex((part) => HEADER[key].has(clean(part)));
+function splitLine(line, delimiter, row) {
+  const parts = [];
+  let value = '';
+  let state = 'start';
+  const finish = () => {
+    parts.push(value.trim());
+    value = '';
+    state = 'start';
+  };
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (state === 'quoted') {
+      if (character !== '"') {
+        value += character;
+      } else if (line[index + 1] === '"') {
+        value += '"';
+        index += 1;
+      } else {
+        state = 'after-quote';
+      }
+    } else if (character === delimiter) {
+      finish();
+    } else if (character === '"') {
+      if (state !== 'start') throw new Error(`第 ${row} 行引号位置无效`);
+      state = 'quoted';
+    } else if (/\s/.test(character) && (state === 'start' || state === 'after-quote')) {
+      // Keep the old trim behavior while permitting spaces around quoted fields.
+    } else if (state === 'after-quote') {
+      throw new Error(`第 ${row} 行引号后的字符无效`);
+    } else {
+      value += character;
+      state = 'unquoted';
+    }
+  }
+  if (state === 'quoted') throw new Error(`第 ${row} 行引号未闭合；不支持字段内换行`);
+  finish();
+  return parts;
+}
+
+function headerIndexes(parts, key) {
+  return parts.flatMap((part, index) => HEADER[key].has(clean(part)) ? [index] : []);
 }
 
 function isoDate(value, row) {
@@ -30,19 +99,26 @@ function isoDate(value, row) {
 }
 
 export function parseCbsaColumns(input) {
-  const lines = String(input || '').split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  const lines = String(input || '').split(/\r?\n/)
+    .map((line, index) => ({ line, row: index + 1 }))
+    .filter(({ line }) => line.trim());
   if (lines.length < 2) throw new Error('至少需要一行列名和一行记录');
-  const delimiter = detectDelimiter(lines[0]);
-  const headers = split(lines[0], delimiter);
-  const directionAt = headerIndex(headers, 'direction');
-  const dateAt = headerIndex(headers, 'date');
-  const portAt = headerIndex(headers, 'port');
+  const delimiter = detectDelimiter(lines[0].line, lines[0].row);
+  const headers = splitLine(lines[0].line, delimiter, lines[0].row);
+  const directionColumns = headerIndexes(headers, 'direction');
+  const dateColumns = headerIndexes(headers, 'date');
+  if (directionColumns.length > 1) throw new Error(`第 ${lines[0].row} 行 direction 语义列重复`);
+  if (dateColumns.length > 1) throw new Error(`第 ${lines[0].row} 行 date 语义列重复`);
+  const directionAt = directionColumns[0] ?? -1;
+  const dateAt = dateColumns[0] ?? -1;
+  const portAt = headerIndexes(headers, 'port')[0] ?? -1;
   if (directionAt < 0 || dateAt < 0) throw new Error('列名必须包含 direction 和 date（顺序可交换）');
-  const events = lines.slice(1).map((line, index) => {
-    const parts = split(line, delimiter);
+  const events = lines.slice(1).map(({ line, row }) => {
+    const parts = splitLine(line, delimiter, row);
+    if (parts.length !== headers.length) throw new Error(`第 ${row} 行列数不匹配：应为 ${headers.length} 列，实际为 ${parts.length} 列`);
     const direction = DIRECTION.get(clean(parts[directionAt]));
-    if (!direction) throw new Error(`第 ${index + 2} 行方向只能是 entry 或 exit`);
-    return { direction, date: isoDate(parts[dateAt], index + 2), port: portAt >= 0 ? parts[portAt] || '' : '' };
+    if (!direction) throw new Error(`第 ${row} 行方向只能是 entry 或 exit`);
+    return { direction, date: isoDate(parts[dateAt], row), port: portAt >= 0 ? parts[portAt] || '' : '' };
   }).sort((a, b) => a.date.localeCompare(b.date) || (a.direction === 'exit' ? -1 : 1));
   const trips = [];
   const warnings = [];
