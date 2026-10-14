@@ -11,7 +11,10 @@
     "quiz:batches": "node scripts/quiz-review-batches.mjs",
     "quiz:crosscheck": "node scripts/quiz-crosscheck.mjs",
     "gate": "node scripts/gate.mjs",
-    "check": "node scripts/validate-rules.mjs && node scripts/content-gate.mjs && npm run test && npm run build && npm run gate"
+    "rules:due": "node scripts/rules-expiry.mjs --rules data/rules.json --as-of today --max-age-days 90 --out reports/rules-expiry-latest.json --fail-on-due",
+    "rules:watch": "node scripts/source-watch.mjs --out reports/source-watch-latest.json",
+    "quiz:dedupe": "node scripts/quiz-dedupe.mjs",
+    "check": "node scripts/validate-rules.mjs && node scripts/content-gate.mjs && node scripts/quiz-dedupe.mjs && npm run test && npm run build && npm run gate"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.1",

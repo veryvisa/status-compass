@@ -1,1 +1,1 @@
-2026-10-01-round3.md
+2026-10-14-claude-supply-5x.md

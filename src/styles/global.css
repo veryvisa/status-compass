@@ -28,8 +28,8 @@
   table{width:100%;border-collapse:collapse;display:block;overflow-x:auto}th,td{text-align:left;padding:.7rem;border-bottom:1px solid var(--line);vertical-align:top}code{overflow-wrap:anywhere}
 }
 @layer utilities {
-  .stack>*+*{margin-top:1rem}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  [hidden]{display:none!important}.stack>*+*{margin-top:1rem}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
   @media(max-width:760px){.mast{align-items:flex-start;display:grid}.mast nav{display:flex;max-width:calc(100vw - 2rem);overflow-x:auto;flex-wrap:nowrap;padding:.35rem 0}.hero,.tool-grid,.article-layout{grid-template-columns:1fr}.compass-card{min-height:17rem;max-width:17rem}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:.7rem}h1{font-size:clamp(2.15rem,12vw,3.6rem)}.toc-desktop{display:none}.toc-mobile{display:block}.prev-next{grid-template-columns:1fr}.situation-nav{align-items:flex-start;display:grid}.situation-scroll{max-width:calc(100vw - 3.5rem)}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-  @media print{.mast,footer,.no-print{display:none!important}.panel,.card{break-inside:avoid;box-shadow:none}body{background:white}.wrap,.narrow{width:100%}}
+  @media print{.mast,footer,.no-print{display:none!important}.panel,.card{break-inside:avoid;box-shadow:none}body{background:white}.wrap,.narrow{width:100%}body.print-scenarios .tool-shell>:not([data-scenario-section]){display:none!important}.scenario-calendar{display:table;font-size:.8rem}.scenario-calendar tr{break-inside:avoid}}
 }

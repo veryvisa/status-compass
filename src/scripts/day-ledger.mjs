@@ -1,6 +1,7 @@
 import { calculateFamilyLedger, normalizeFamilyFile, serializeFamilyFile } from '../lib/family-ledger.mjs';
 import { parseTripInput } from '../lib/day-ledger.mjs';
-import { parseCbsaColumns } from '../lib/cbsa-import.mjs';
+import { parseCbsaColumns, parseCbsaSplit } from '../lib/cbsa-import.mjs';
+import { buildScenarios } from '../lib/scenarios.mjs';
 
 const form = document.querySelector('[data-family-form]');
 if (form) {
@@ -9,6 +10,14 @@ if (form) {
   const status = form.querySelector('[data-ledger-status]');
   const cbsaTarget = form.querySelector('[data-cbsa-target]');
   const cbsaColumns = form.querySelector('[data-cbsa-columns]');
+  const cbsaMode = form.querySelector('[data-cbsa-mode]');
+  const cbsaDateOrder = form.querySelector('[data-cbsa-date-order]');
+  const cbsaEntries = form.querySelector('[data-cbsa-entries]');
+  const cbsaExits = form.querySelector('[data-cbsa-exits]');
+  const cbsaPreviewOut = form.querySelector('[data-cbsa-preview-out]');
+  const scenarioMember = document.querySelector('[data-scenario-member]');
+  const scenarioDeparture = document.querySelector('[data-scenario-departure]');
+  const scenarioOut = document.querySelector('[data-scenario-out]');
   let members = [];
   const sample = {
     schemaVersion: 2, asOf: '2026-10-01', members: [
@@ -62,6 +71,9 @@ if (form) {
     const previousTarget = cbsaTarget.value;
     cbsaTarget.innerHTML = members.map((member) => `<option value="${escapeHtml(member.id)}">${escapeHtml(member.name)}</option>`).join('');
     if (members.some((member) => member.id === previousTarget)) cbsaTarget.value = previousTarget;
+    const previousScenario = scenarioMember.value;
+    scenarioMember.innerHTML = members.map((member) => `<option value="${escapeHtml(member.id)}">${escapeHtml(member.name)}</option>`).join('');
+    if (members.some((member) => member.id === previousScenario)) scenarioMember.value = previousScenario;
   }
 
   const read = () => ({ schemaVersion: 2, asOf: form.asOf.value, members: syncFromEditors() });
@@ -83,8 +95,9 @@ if (form) {
         ${metric('入籍尺', r.citizenship.total, `PR 后 ${r.citizenship.prDays} ＋ PR 前折算 ${r.citizenship.prePrCredit}；本规则自 ${r.ruleVersions.citizenship} 起`)}
         ${metric('本税年在加', r.tax.days, `${r.tax.signal ? '越过' : '未越过'} 183 天信号，不能单独定税务居民；本规则自 ${r.ruleVersions.tax} 起`)}
         ${metric(`${r.health.province} 医保尺`, r.health.days, `${r.health.signal}；本规则自 ${r.ruleVersions.health} 起`)}
-        ${metric('OAS 居住天数线索', r.oas.days, `从 ${r.oas.periodStart} 记到 ${r.oas.periodEnd}；不换成小数年或资格比例；本规则自 ${r.ruleVersions.oas} 起`)}
-      </div>${exceptionRows}<details><summary>OAS 通常居住事实与证据清单</summary><ul class="result-list">${r.oas.evidenceChecklist.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul><p class="help">这是整理清单，不是 Service Canada 承诺接受的封闭材料表；官方可在申请后要求其他文件。</p></details><h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${escapeHtml(event.label)}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol></article>`;
+        ${metric('OAS：实际在加天数', r.oas.days, `从 ${r.oas.periodStart} 记到 ${r.oas.periodEnd}；不换成小数年或资格比例；本规则自 ${r.ruleVersions.oas} 起`)}
+        ${metric('OAS：短离开不算中断时', r.oas.residenceIfShortAbsencesTemporary, `把不超过一年的离开当作临时离开（OAS 条例第 21(4)(a) 条）后的天数；是否算“临时”要靠证据，${r.oas.longAbsences.length ? `另有 ${r.oas.longAbsences.length} 段超过一年或尚未返加，已扣除` : '没有超过一年的离开'}`)}
+      </div>${exceptionRows}<details><summary>OAS 居住证据清单（按要证明的事分组）</summary>${r.oas.evidenceGroups.map((group) => `<h4>${escapeHtml(group.title)}</h4><p class="help">${escapeHtml(group.proves)}</p><ul class="result-list">${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`).join('')}${r.oas.absences.length ? `<h4>你的离境段</h4><ul class="result-list">${r.oas.absences.map((item) => `<li>${escapeHtml(item.departure)} 至 ${escapeHtml(item.return || '尚未返加')}：在外 ${item.totalAbsentDays} 天，${item.return ? (item.withinOneYear ? '不超过一年，若属临时离开可主张居住未中断' : '超过一年，除非属于条例第 21(5) 条列明的情形') : '尚未返加，暂不能判断'}</li>`).join('')}</ul>` : ''}<p class="help">这是整理清单，不是 Service Canada 承诺接受的封闭材料表；官方可在申请后要求其他文件。依据：${r.oas.evidenceSources.map((source) => `<a href="${escapeHtml(source.url)}">${escapeHtml(source.label)}</a>`).join('；')}</p></details><h3>未来五年关键日期</h3><ol class="timeline">${r.timeline.map((event) => `<li><strong>${event.date}</strong><br>${escapeHtml(event.label)}</li>`).join('') || '<li>当前输入下，未来五年没有算出新的门槛日。</li>'}</ol></article>`;
     }).join('');
     status.textContent = `已在当前页面完成 ${family.members.length} 名成员的计算；没有上传任何记录。`;
     return family;
@@ -97,16 +110,64 @@ if (form) {
     try { const blob = new Blob([JSON.stringify(serializeFamilyFile(read()), null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = members.length > 1 ? 'maple-status-family.json' : 'maple-status-records.json'; a.click(); URL.revokeObjectURL(a.href); } catch (error) { status.textContent = `无法导出：${error.message}`; }
   });
   form.querySelector('[data-import]').addEventListener('change', async (event) => { try { const data = JSON.parse(await event.target.files[0].text()); write(data); render(data); } catch (error) { status.textContent = `无法导入：${error.message}`; } });
+  const parseCbsa = () => {
+    const dateOrder = cbsaDateOrder.value;
+    const parsed = cbsaMode.value === 'columns'
+      ? { unmatchedEntries: [], droppedColumns: [], ...parseCbsaColumns(cbsaColumns.value, { dateOrder }) }
+      : parseCbsaSplit({ entries: cbsaEntries.value, exits: cbsaExits.value, dateOrder });
+    if (parsed.trips.length === 0) throw new Error('没有配出任何离境行程；只有入境记录时，请先手动补离境日');
+    return parsed;
+  };
+  cbsaMode.addEventListener('change', () => {
+    form.querySelector('[data-cbsa-split-fields]').hidden = cbsaMode.value !== 'split';
+    form.querySelector('[data-cbsa-column-fields]').hidden = cbsaMode.value !== 'columns';
+    cbsaPreviewOut.innerHTML = '';
+  });
+  form.querySelector('[data-cbsa-preview]').addEventListener('click', () => {
+    try {
+      const parsed = parseCbsa();
+      cbsaPreviewOut.innerHTML = `<table><thead><tr><th>离境</th><th>返加</th><th>口岸</th></tr></thead><tbody>${parsed.trips.map((trip) => `<tr><td>${escapeHtml(trip.departure)}</td><td>${escapeHtml(trip.return || '尚未返加')}</td><td>${escapeHtml(trip.note)}</td></tr>`).join('')}</tbody></table>${parsed.warnings.length ? `<ul class="result-list">${parsed.warnings.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}`;
+      status.textContent = `预览：${parsed.events.length} 条记录配成 ${parsed.trips.length} 段行程；还没有改动任何成员。`;
+    } catch (error) { cbsaPreviewOut.innerHTML = ''; status.textContent = `CBSA 记录未通过：${error.message}；原行程保持不变。`; }
+  });
   form.querySelector('[data-cbsa-import]').addEventListener('click', () => {
     try {
       syncFromEditors();
-      const parsed = parseCbsaColumns(cbsaColumns.value);
+      const parsed = parseCbsa();
       const target = members.find((member) => member.id === cbsaTarget.value);
       if (!target) throw new Error('请先选择家庭成员');
       target.trips = parsed.trips;
       renderEditors();
-      status.textContent = `已为 ${target.name} 解析 ${parsed.events.length} 条入出境事件，生成 ${parsed.trips.length} 段行程${parsed.warnings.length ? `；还有 ${parsed.warnings.length} 条未配对入境提示` : ''}。`;
-    } catch (error) { status.textContent = `CBSA 列未导入：${error.message}；原行程保持不变。`; }
+      status.textContent = `已为 ${target.name} 解析 ${parsed.events.length} 条入出境事件，生成 ${parsed.trips.length} 段行程${parsed.unmatchedEntries.length ? `；另有 ${parsed.unmatchedEntries.length} 次入境缺离境日，需手动补` : ''}${parsed.warnings.length ? `；共 ${parsed.warnings.length} 条提示，见预览` : ''}。`;
+    } catch (error) { status.textContent = `CBSA 记录未导入：${error.message}；原行程保持不变。`; }
+  });
+
+  function renderScenarios() {
+    syncFromEditors();
+    const member = members.find((candidate) => candidate.id === scenarioMember.value);
+    if (!member) throw new Error('请先选择成员');
+    const scenarios = buildScenarios(member, { asOf: form.asOf.value, departure: scenarioDeparture.value });
+    const cell = (value) => value ? escapeHtml(value) : '五年内算不到';
+    const head = `<tr><th>月份</th>${scenarios.map((item) => `<th>${escapeHtml(item.label)}</th>`).join('')}</tr>`;
+    const marks = (item, month) => [
+      item.prThresholdDate?.startsWith(month) ? `PR 天数够 ${item.prThresholdDate.slice(5)}` : '',
+      item.citizenshipDate?.startsWith(month) ? `入籍天数够 ${item.citizenshipDate.slice(5)}` : '',
+      item.prBreach?.date.startsWith(month) ? `PR 跌破 ${item.prBreach.date.slice(5)}` : ''
+    ].filter(Boolean).join('；');
+    const rows = scenarios[0].calendar.map((row, index) => `<tr><th>${row.month}</th>${scenarios.map((item) => { const r = item.calendar[index]; const m = marks(item, row.month); return `<td>${r.absent ? `离境 ${r.absent} 天` : '在加'}${m ? `<br><strong>${escapeHtml(m)}</strong>` : ''}</td>`; }).join('')}</tr>`).join('');
+    scenarioOut.innerHTML = `<h3>${escapeHtml(member.name)}：三种情景对照（计算日 ${escapeHtml(form.asOf.value)}）</h3>
+      <table><thead><tr><th>情景</th><th>PR 天数达到门槛</th><th>入籍实际居住天数达到门槛</th><th>PR 五年窗口会不会跌破</th></tr></thead><tbody>${scenarios.map((item) => `<tr><th>${escapeHtml(item.label)}</th><td>${cell(item.prThresholdDate)}</td><td>${cell(item.citizenshipDate)}</td><td>${item.prBreach ? `会：${escapeHtml(item.prBreach.date)} 那天窗口内只有 ${item.prBreach.days} 天，门槛 ${item.prBreach.required} 天` : '五年内不会'}</td></tr>`).join('')}</tbody></table>
+      <details open><summary>每个情景的假设</summary><ul class="result-list">${scenarios.map((item) => `<li><strong>${escapeHtml(item.label)}</strong>：${item.assumptions.map(escapeHtml).join('；')}</li>`).join('')}</ul></details>
+      <h3>五年月历</h3><p class="help">每格是那个月在加拿大以外的天数（离境日与返加日算在加拿大）；加粗的是那个月出现的关键日。</p><table class="scenario-calendar"><thead>${head}</thead><tbody>${rows}</tbody></table>
+      <div class="warning"><strong>这是天数推演，不是资格结论。</strong> 入籍还要看报税、语言与禁限条件；PR 是否违反居住义务还涉及陪同公民配偶、驻外工作等例外与人道考量，由官员审查决定。</div>`;
+    status.textContent = `已为 ${member.name} 算出 ${scenarios.length} 种情景；没有保存或上传。`;
+  }
+  document.querySelector('[data-scenario-run]').addEventListener('click', () => { try { renderScenarios(); } catch (error) { status.textContent = `情景未计算：${error.message}`; scenarioOut.innerHTML = `<p class="muted">${escapeHtml(error.message)}</p>`; } });
+  document.querySelector('[data-scenario-print]').addEventListener('click', () => {
+    try { renderScenarios(); } catch (error) { status.textContent = `情景未计算：${error.message}`; return; }
+    document.body.classList.add('print-scenarios');
+    window.print();
+    document.body.classList.remove('print-scenarios');
   });
 
   members = [blankMember(0)];

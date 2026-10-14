@@ -13,7 +13,7 @@ const CATEGORY_ORDER = [
   'current'
 ];
 
-const usage = 'Usage: node scripts/rules-expiry.mjs --rules <file> --as-of YYYY-MM-DD --max-age-days <positive integer> --out <file>';
+const usage = 'Usage: node scripts/rules-expiry.mjs --rules <file> --as-of YYYY-MM-DD|today --max-age-days <positive integer> --out <file> [--fail-on-due]';
 
 function compareText(left, right) {
   if (left < right) return -1;
@@ -160,6 +160,9 @@ export function buildExpiryReport(payload, options) {
 export function parseArgs(argv) {
   const allowed = new Set(['--rules', '--as-of', '--max-age-days', '--out']);
   const values = {};
+  // --fail-on-due：把清单变成门——有到期规则时退出码 1，交给 preflight 等执法点用。
+  const failOnDue = argv.includes('--fail-on-due');
+  argv = argv.filter((item) => item !== '--fail-on-due');
   for (let index = 0; index < argv.length; index += 2) {
     const flag = argv[index];
     const value = argv[index + 1];
@@ -169,6 +172,7 @@ export function parseArgs(argv) {
     values[flag] = value;
   }
   for (const flag of allowed) if (!(flag in values)) throw new Error(`missing required argument: ${flag}`);
+  if (values['--as-of'] === 'today') values['--as-of'] = new Date().toISOString().slice(0, 10);
   if (!parseIsoDate(values['--as-of'])) throw new Error('--as-of must be a valid ISO date (YYYY-MM-DD)');
   if (!/^[1-9]\d*$/.test(values['--max-age-days'])) {
     throw new Error('--max-age-days must be a positive integer');
@@ -182,7 +186,8 @@ export function parseArgs(argv) {
     rules: values['--rules'],
     asOf: values['--as-of'],
     maxAgeDays,
-    out: values['--out']
+    out: values['--out'],
+    failOnDue
   };
 }
 
@@ -205,6 +210,10 @@ export function main(argv = process.argv.slice(2)) {
     fs.mkdirSync(path.dirname(path.resolve(args.out)), { recursive: true });
     fs.writeFileSync(args.out, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
     console.log(JSON.stringify(report.counts));
+    if (args.failOnDue && report.counts.category_rules.due > 0) {
+      console.error(`rules-expiry: ${report.counts.category_rules.due} rule(s) due for reread (checked_at older than ${args.maxAgeDays} days); see ${args.out}`);
+      return 1;
+    }
     return 0;
   } catch (error) {
     console.error(`rules-expiry: ${error.message}`);

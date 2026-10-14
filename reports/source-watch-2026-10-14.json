@@ -1,0 +1,1588 @@
+{
+  "schema_version": 1,
+  "fetched_at": "2026-10-14T19:25:31.678Z",
+  "rules_file": "data/rules.json",
+  "baseline_file": "data/source-watch-baseline.json",
+  "policy": "Read-only. A missing quote, changed hash or unreachable page only queues a human reread; rules.json is never modified by this script.",
+  "counts": {
+    "sources": 70,
+    "baseline_created": 58,
+    "unreachable": 1,
+    "quote_missing": 11,
+    "needs_reread": 12
+  },
+  "needs_reread": [
+    {
+      "url": "https://ga.sz.gov.cn/JMHD/YWZSK/CRJGL_ZS/content/post_10578929.html",
+      "state": "unreachable",
+      "detail": "ERR_SSL_BAD_ECPOINT",
+      "missing_quotes": []
+    },
+    {
+      "url": "https://www.canada.ca/content/dam/ircc/migration/ircc/english/resources/manuals/enf/enf23-eng.pdf",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "pr.exception.accompanying_pr_worker"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/imm5444.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "pr.departure_return_count"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/deemed-residents.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "tax.significant_ties"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/dispositions-property.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "departure_tax.t2061a"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/leaving-canada-emigrants.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "cra.emigrant.nonresident_date"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-penalties.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "t1135.gross_negligence_penalty"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/while-receiving.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "cpp.foreign_currency_list"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/eligibility.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "oas.abroad_status_day_before",
+        "oas.annual_tax_return"
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/while-receiving.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "gis.absence_months",
+        "oas.abroad_stop_6_months"
+      ]
+    },
+    {
+      "url": "https://www.chinatax.gov.cn/n810356/n3255681/c4251584/content.html",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "cn_iit.domicile"
+      ]
+    },
+    {
+      "url": "https://www2.gov.bc.ca/assets/gov/health/practitioner-pro/medical-services-plan/group-procedure-guide.pdf",
+      "state": "quote_missing",
+      "detail": null,
+      "missing_quotes": [
+        "msp.extended_absence_months"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "url": "https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193028/content.html",
+      "state": "baseline_created",
+      "sha256": "e533a865b31195ef8b4da475475c4fe3eb9af4b2b457cbd84de0bfc5750cd136",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "china.iit.resident_183",
+          "quote_found": true
+        },
+        {
+          "rule_id": "cn_iit.resident_test",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://ga.sz.gov.cn/JMHD/YWZSK/CRJGL_ZS/content/post_10578929.html",
+      "state": "unreachable",
+      "detail": "ERR_SSL_BAD_ECPOINT",
+      "rules": [
+        {
+          "rule_id": "china.hukou.cancel_after_foreign_nationality",
+          "quote_found": null
+        }
+      ]
+    },
+    {
+      "url": "https://ircc.canada.ca/english/information/applications/guides/5781etoc.asp",
+      "state": "baseline_created",
+      "sha256": "82e15745a83da4ebe26c74acfc22a8873295189d946a33b380bd9d8def2afcfb",
+      "date_modified": "2025-06-19",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "fee.renounce_pr",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://ircc.canada.ca/english/information/fees/fees.asp",
+      "state": "baseline_created",
+      "sha256": "dd942f3f7fae2ad29e419f8d30de2f5357576967bf0c51bfcd70a29083abcda4",
+      "date_modified": "2026-09-21",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "fee.pr_card",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.prtd",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.citizenship_adult",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.right_of_citizenship",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.citizenship_minor",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.renounce_citizenship",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.resume_citizenship_adult",
+          "quote_found": true
+        },
+        {
+          "rule_id": "fee.trv",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/c-29/section-22.1.html",
+      "state": "baseline_created",
+      "sha256": "a589244492e257a67264a5792e15cd865d969c9d9f369994dac8b94fc712533c",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.jr_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/c-29/section-9.html",
+      "state": "baseline_created",
+      "sha256": "38884ebbada875e7f9fe191167cdcca695bf02c2a55cc33f7538cc9c9b5214ea",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.renounce_effective",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-31.html",
+      "state": "baseline_created",
+      "sha256": "fde717f346c74047d2d587d1962a5d5eb872b763f1534c2b679f43557022c3cf",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "irpa.prtd_365_presence",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-46.html",
+      "state": "baseline_created",
+      "sha256": "9719183c7ea9de54468ad51a9fb59393f8f26013418f008ed598d6bcb41e7298",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "irpa.renounce_pr_temp_months",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-72.html",
+      "state": "baseline_created",
+      "sha256": "ad2379ae6c65aab78b40f2904137da369a6d841f3d0aaf56f75051462d754dd9",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "irpa.jr_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/I-3.3/section-38.html",
+      "state": "baseline_created",
+      "sha256": "b3a20e55876e64910d50f61a64c5953a350d82d78e3ced7408ea16978d29bdc3",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "departure_tax.capital_gain_inclusion",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-277/FullText.html",
+      "state": "baseline_created",
+      "sha256": "1a39da821dbadaff281abe76f6fc30ce87825ece1e175a72e3786bfdd2824811",
+      "date_modified": "2026-09-28",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "iad.residency_appeal_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "iad.removal_order_appeal_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://ru.china-embassy.gov.cn/zfhz_0/zgflyd_142850/202504/t20250430_11612072.htm",
+      "state": "baseline_created",
+      "sha256": "79a0d008cd142af15443821753c95e06a35e282c2eab7e1fe6cc80b41f63ddcc",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "china.nationality.no_dual",
+          "quote_found": true
+        },
+        {
+          "rule_id": "china.nationality.auto_loss",
+          "quote_found": true
+        },
+        {
+          "rule_id": "china.nationality.restore",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/content/dam/ircc/migration/ircc/english/resources/manuals/enf/enf23-eng.pdf",
+      "state": "quote_missing",
+      "sha256": "cb7376b3433b99ed28d0d109d1595bb90087e94c94b6c9f774ccc53210bb3fad",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "pr.exception.accompanying_pr_worker"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.exception.citizen_family",
+          "quote_found": true
+        },
+        {
+          "rule_id": "pr.exception.canadian_business",
+          "quote_found": true
+        },
+        {
+          "rule_id": "pr.exception.accompanying_pr_worker",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/department-finance/programs/tax-policy/tax-treaties/country/china-agreement-1986.html",
+      "state": "baseline_created",
+      "sha256": "45dd728242af5b8a931e84a906d9f3cc6e0adc7cefd82fc57d84214568480b96",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "treaty_cn.signed",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art4_tiebreaker",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art10_dividend_general",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art10_dividend_company",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art11_interest",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art12_royalties",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art20_other_income",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art13_5_other_gains",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art21_credit_canada",
+          "quote_found": true
+        },
+        {
+          "rule_id": "treaty_cn.art23_map",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/employment-social-development/programs/old-age-security/reports/oas-toolkit.html",
+      "state": "baseline_created",
+      "sha256": "299bacad233b8bc6696a053797cb9e072fd19103ba748ca0d16c0e53c1c9944c",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "oas.full_years",
+          "quote_found": true
+        },
+        {
+          "rule_id": "oas.partial_rate",
+          "quote_found": true
+        },
+        {
+          "rule_id": "oas.abroad_under20_six_months",
+          "quote_found": true
+        },
+        {
+          "rule_id": "gis.abroad_stop_regardless",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/application-voluntarily-renounce-permanent-resident-status.html",
+      "state": "baseline_created",
+      "sha256": "22ef8010cea97757e62e51701a101ee5f353a4dc27b286513bff6bebe3fd19f1",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.renounce_checklist",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-0302-application-renounce-canadian-citizenship-subsection-9-1.html",
+      "state": "baseline_created",
+      "sha256": "97ea4f2603298d3bb17d9a97773b3a12b2269e90e2af76c146eb669edfe73913",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.renounce_form",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5445-applying-permanent-resident-card-card-first-application-replacement-renewal-change-gender-identifier.html",
+      "state": "baseline_created",
+      "sha256": "28cfda9069abbaa11aec58640a06733e56338485513512240a9b708a1e95da5d",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.window_years",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prcard.renew_max_remaining",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prcard.urgent_window",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prcard.docs_threshold",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prcard.photo_age",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5529-applying-permanent-resident-travel-document.html",
+      "state": "baseline_created",
+      "sha256": "1d494ec9476b5a7a278da311eb9446c416e9e05ccad656000e657ed0153385d8",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "prtd.required_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prtd.hc_review",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prtd.china_exit_entry",
+          "quote_found": true
+        },
+        {
+          "rule_id": "prtd.hc_question",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/imm5444.html",
+      "state": "quote_missing",
+      "sha256": "0d5783f337f6515093e3808949ac7adbf51855f676610b237a691195f8a3f816",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "pr.departure_return_count"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.departure_return_count",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/imm5782.html",
+      "state": "baseline_created",
+      "sha256": "2e1d445cfb2cf1af164529838d0e1a342b62f8350593d0b565b163359941eec1",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.renounce_form",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/after.html",
+      "state": "baseline_created",
+      "sha256": "08a82321fe23600a09826ad10c71801680a4f5b500403b475e74c06eb7b5606e",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.after.reply_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.after.notify_absence",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/how/adult-forms-documents.html",
+      "state": "baseline_created",
+      "sha256": "17faf5f77148be1bd802bf1b8cf13c3600f12a8e97a4fc883639fb5430e5285f",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.forms_paper",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.lang.celpip",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.lang.ielts",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.lang.pte",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.lang.french",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/how/physical-presence.html",
+      "state": "baseline_created",
+      "sha256": "e85ece4aa724fa27744de2483fe3de2488d7fbc191e90c8111d3c6c9a5c62418",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.presence_form",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html",
+      "state": "baseline_created",
+      "sha256": "5767930d29679473e8c0c6c0569809c4e460ff59daebb18d727a711725057fb4",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.window_years",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.required_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.min_pr_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.pre_pr_factor",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.pre_pr_max",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.tax_years",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.language_level",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test_age_range",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.custody_not_counted",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.minor_5_1_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/language-proof.html",
+      "state": "baseline_created",
+      "sha256": "32e0d680ede1a2c51a5fa141ac2dc31919b8f01a43fae202f694486e1d9bdfaf",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.language_min_age",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.language_max_age",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/renounce-canadian-citizenship/eligibility.html",
+      "state": "baseline_created",
+      "sha256": "0b2e0936c0dedfbc8bfe5e79103465bda53ed12830c622cac786eedfb4fc82cb",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.renounce_min_age",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.renounce_other_citizenship",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.renounce_outside_canada",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/how-it-works.html",
+      "state": "baseline_created",
+      "sha256": "db5bad21d17f9f86f89edead7ed87ec1edf01eaaabf547c0e839bfa19a8c2c7b",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.test.window_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/invitation.html",
+      "state": "baseline_created",
+      "sha256": "878397a825b838390f6ce13c757e1b74ee8885405b5354601476475242b9331f",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.test.invite_months",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test.reschedule_weeks",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/missed.html",
+      "state": "baseline_created",
+      "sha256": "4c6e49e91cf167d56601bc3ba9ca0e5dace5cf9ad8813b994ceb6efeb20477f7",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.test.missed_contact_days",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/online.html",
+      "state": "baseline_created",
+      "sha256": "0ddb1c99c724f015739cc4622d33694418935ca6c37a4268a1d098fb137a55d2",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.test.link_minutes",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test.warning_minutes",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/results.html",
+      "state": "baseline_created",
+      "sha256": "276b9ee2a29792953f1824aecd3aecfb72a7572275820512d47ddcb3be02001b",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.hearing.knowledge",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.hearing.language",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.hearing.duration",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/study.html",
+      "state": "baseline_created",
+      "sha256": "213c97508b1704147cc808c80938610d989245201455f24d6b085822e6cf09e5",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "citizenship.test_questions",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test_minutes",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test_pass",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.test_attempts",
+          "quote_found": true
+        },
+        {
+          "rule_id": "citizenship.study_guide",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/status.html",
+      "state": "baseline_created",
+      "sha256": "e84bdb01018fca3f9f2ccb078e650dddb5c99f5ecf788b1b187f86e11a0c41c0",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "pr.required_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "pr.card_expiry_not_status_loss",
+          "quote_found": true
+        },
+        {
+          "rule_id": "pr.status_loss_ways",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/voluntary-disclosures-program/changes-vdp.html",
+      "state": "baseline_created",
+      "sha256": "cc38039a18af1d9ed46580dbe27a2b3d63614e0da5932cee761e403f5b873162",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "vdp.relief_unprompted",
+          "quote_found": true
+        },
+        {
+          "rule_id": "vdp.foreign_years",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html",
+      "state": "baseline_created",
+      "sha256": "1b768b05fc152a924b9df655ea1108f1842759652fdef0b93e5459fe6cd9b012",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cgeb.renamed",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gsthstc-eligibility.html",
+      "state": "baseline_created",
+      "sha256": "a9bf70ad88de90225fb64f23877ae85782892da873868590561d8bfb5d2ec39f",
+      "date_modified": "2026-03-02",
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cgeb.residency_timing",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/nr301.html",
+      "state": "baseline_created",
+      "sha256": "71b2bc84c907149961d4f221c0acc48570c00be7bcd8c50bd698312705a16b10",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "nonres.nr301",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/nr73.html",
+      "state": "baseline_created",
+      "sha256": "9dfd1e2a84297b5c99da77830c2e874976d472778162a76bb5dc69eec86e243c",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.nr73",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/p148/p148-resolving-your-dispute-objection-appeal-rights-under-income-tax-act.html",
+      "state": "baseline_created",
+      "sha256": "83601efc50162cd98d6a17a5334acdb2a0fb14fb519667429628d81dba48b2fb",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.objection_deadline_individual",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4114/canada-child-benefit.html",
+      "state": "baseline_created",
+      "sha256": "d1abd26762cd70415924d4d3fd688fc12e14e88b24de8734b94fc04fe5a274e2",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "ccb.tax_resident",
+          "quote_found": true
+        },
+        {
+          "rule_id": "ccb.child_max_age",
+          "quote_found": true
+        },
+        {
+          "rule_id": "ccb.temporary_resident_months",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4155/t4155-old-security-return-income-guide-non-residents.html",
+      "state": "baseline_created",
+      "sha256": "5fc4a45e5ea4a88738b2cedca1fe565c0850404b9e8a1fa4fd72034f4cb0fca8",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "oas.oasri_exempt_list_no_china",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/change-your-return.html",
+      "state": "baseline_created",
+      "sha256": "bfced83a5d07aba1fb8d3534c59923de8814940eef0a4df8d4a8df3261451689",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.adjust_refund_limit",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/tax-free-savings-account/owing-tax/non-resident.html",
+      "state": "baseline_created",
+      "sha256": "b92f54197470e1742f1536669ccd6b9296e3cc30dcc7d2589ad5f90f341ba373",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tfsa.nonresident_contribution_tax",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/deemed-residents.html",
+      "state": "quote_missing",
+      "sha256": "c84b5fa325de66d9eddd9f823682f6b6df5a0ec0fea62ed53fdf8c66246383d2",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "tax.significant_ties"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.deemed_resident_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.significant_ties",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/dispositions-property.html",
+      "state": "quote_missing",
+      "sha256": "497882400ee85846757edba95290f9ea7dbf3d4b34d9e18fddefd90448bdcecf",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "departure_tax.t2061a"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "departure_tax.t1243",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.t1244",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.security_threshold",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.security_threshold_quebec",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.excluded_property",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.short_term_resident_60_months",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.short_term_resident",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.t1161_personal_use_exclusion",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.t1161_penalty",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.t2061a",
+          "quote_found": false
+        },
+        {
+          "rule_id": "departure_tax.t1244_deadline",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.unwind",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.deferred_payment_due",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/leaving-canada-emigrants.html",
+      "state": "quote_missing",
+      "sha256": "756deae3a8769f89339ad66357d724bac592b9098fea060a79b6300d3c096264",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "cra.emigrant.nonresident_date"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "departure_tax.deemed_disposition",
+          "quote_found": true
+        },
+        {
+          "rule_id": "departure_tax.t1161_threshold",
+          "quote_found": true
+        },
+        {
+          "rule_id": "cra.emigrant.nonresident_date",
+          "quote_found": false
+        },
+        {
+          "rule_id": "cra.emigrant.no_ccb",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.emigrant_nonresident_date",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.deemed_nonresident_same_rules",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tfsa.nonresident_no_contribution",
+          "quote_found": true
+        },
+        {
+          "rule_id": "benefits.emigrant_ccb_cgeb",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html",
+      "state": "baseline_created",
+      "sha256": "8fd470d4027c02fa614d9094e6b710da9e5e3a9fc742681cb48436319fd6f882",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cra.newcomer.resident_start",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants/completing-return-newcomers.html",
+      "state": "baseline_created",
+      "sha256": "68f543ae8bdab3ab583cbc85fc2952a15972d8f36b450bade31063113edda33a",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.part_year_world_income",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.part_year_90pct",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.immigrant_deemed_acquisition",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/non-residents-canada.html",
+      "state": "baseline_created",
+      "sha256": "7f45dd9fd06c4dee2991984d6d036b63e9f785e95f255bf359ab606d2a620c37",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "nonres.part_xiii_rate",
+          "quote_found": true
+        },
+        {
+          "rule_id": "nonres.arm_length_interest",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-form-t1135.html",
+      "state": "baseline_created",
+      "sha256": "082d4624bf82cdea086596c05a2a97a22f4b2c2291964b754b89371a7fb39237",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "t1135.threshold",
+          "quote_found": true
+        },
+        {
+          "rule_id": "t1135.simplified_limit",
+          "quote_found": true
+        },
+        {
+          "rule_id": "t1135.first_year_exempt",
+          "quote_found": true
+        },
+        {
+          "rule_id": "t1135.emigrant_period",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/questions-answers-about-penalties.html",
+      "state": "quote_missing",
+      "sha256": "873d5f0b08bf5fd21850c9fdddf09f1912ff8a415ef364eb4bb77f8a29e5fd68",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "t1135.gross_negligence_penalty"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "t1135.gross_negligence_penalty",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/information-been-moved/foreign-reporting/table-penalties.html",
+      "state": "baseline_created",
+      "sha256": "baebbc827894b2491d73950272d30aeb67256cc62b0db8491fbf5ee8efe17802",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "t1135.late_penalty",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/income-tax/income-tax-folios-index/series-5-international-residency/folio-1-residency/income-tax-folio-s5-f1-c1-determining-individual-s-residence-status.html",
+      "state": "baseline_created",
+      "sha256": "aeebcf018f419f6aa7a10cf0c7b624e71d7862689fdc487c5e1a80b67924f580",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "tax.part_day_counts",
+          "quote_found": true
+        },
+        {
+          "rule_id": "tax.folio_secondary_ties",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/apply.html",
+      "state": "baseline_created",
+      "sha256": "eafb5881d2c6e18ae87fb973e43e0fa3c39c9c28d83610522bba66e5f1008ada",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cpp.apply_from_abroad",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-benefit/eligibility.html",
+      "state": "baseline_created",
+      "sha256": "7fc88c12762b1c569c84e77939065727cd217759ce0b0264159b8a2e5a529b3a",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cpp.eligibility",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/china.html",
+      "state": "baseline_created",
+      "sha256": "4f23fef51c1d10cd78618d7e0c385d242d4c6062efa55ad7e2fe99bda7e1662a",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "canada_china_agreement.scope",
+          "quote_found": true
+        },
+        {
+          "rule_id": "canada_china_agreement.oas_totalization",
+          "quote_found": true
+        },
+        {
+          "rule_id": "cn_ssa.in_force",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/while-receiving.html",
+      "state": "quote_missing",
+      "sha256": "f0cef915f354d4c885637234907113a8c3c0d27cdc7d3b75d3cc786dc462b19a",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "cpp.foreign_currency_list"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cpp.foreign_currency_list",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/benefit-amount.html",
+      "state": "baseline_created",
+      "sha256": "8f1bdb485039df04b22c1026c242de5421de0f57c1f2b0877a4b3704ad6a821b",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "oas.minimum_years_canada",
+          "quote_found": true
+        },
+        {
+          "rule_id": "oas.minimum_years_abroad",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/eligibility.html",
+      "state": "quote_missing",
+      "sha256": "df1d6352fe968261026769c814d27c4bf3c536a18a4992c810dfe616be2d6624",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "oas.abroad_status_day_before",
+        "oas.annual_tax_return"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "oas.min_age",
+          "quote_found": true
+        },
+        {
+          "rule_id": "oas.abroad_status_day_before",
+          "quote_found": false
+        },
+        {
+          "rule_id": "oas.annual_tax_return",
+          "quote_found": false
+        },
+        {
+          "rule_id": "oas.abroad_legal_status",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/recovery-tax.html",
+      "state": "baseline_created",
+      "sha256": "501efac786961184d995e45728579d600e5b3bcf50f767c826b10f2ed69e959d",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "oas.recovery_threshold_2025",
+          "quote_found": true
+        },
+        {
+          "rule_id": "oas.oasri_deadline",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/while-receiving.html",
+      "state": "quote_missing",
+      "sha256": "5a6a05e9fb51ae8d7df017fb3ebd710bb0685fb990add15c993df3c0a2c800b5",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "gis.absence_months",
+        "oas.abroad_stop_6_months"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "gis.absence_months",
+          "quote_found": false
+        },
+        {
+          "rule_id": "oas.abroad_stop_6_months",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.chinatax.gov.cn/n810356/n3255681/c4251584/content.html",
+      "state": "quote_missing",
+      "sha256": "f056a0c87c40fcec13afa621d402979dcbcf02f365071e480993a11a70da510e",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "cn_iit.domicile"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "cn_iit.domicile",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.ontario.ca/document/resources-for-physicians/registration-ontario-health-insurance-coverage",
+      "state": "baseline_created",
+      "sha256": "28c6111346e1d4c85596b51477d30a5f92f96e0fbacc2f820396bb3075ece3c5",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "ohip.regular_absence_months",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.ontario.ca/page/apply-ohip-and-get-health-card",
+      "state": "baseline_created",
+      "sha256": "ca54e7620360293fcc693d69f72027b661cc37f6dd973821834c3110d572fbc2",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "ohip.presence_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "ohip.initial_presence_days",
+          "quote_found": true
+        },
+        {
+          "rule_id": "ohip.no_waiting_period",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www.ontario.ca/page/ohip-coverage-while-outside-canada",
+      "state": "baseline_created",
+      "sha256": "4eb20e634ce676463283e0a15293b15bcf11396c705cc6ac63673a020ea97cf5",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "ohip.special_absence_years",
+          "quote_found": true
+        },
+        {
+          "rule_id": "ohip.two_year_absence_conditions",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www2.gov.bc.ca/assets/gov/health/practitioner-pro/medical-services-plan/group-procedure-guide.pdf",
+      "state": "quote_missing",
+      "sha256": "350affc64005e27d05cfdad43641fcbe4be6e5023cf45bbf83a775c2f5e6dc23",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [
+        "msp.extended_absence_months"
+      ],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "msp.vacation_absence_months",
+          "quote_found": true
+        },
+        {
+          "rule_id": "msp.extended_absence_months",
+          "quote_found": false
+        }
+      ]
+    },
+    {
+      "url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/are-you-eligible",
+      "state": "baseline_created",
+      "sha256": "742f0a8ffaf3ec88ce6bb48381293e5060b3f3c467f7cb098d1afe7a76a968aa",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "msp.presence_months",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/managing-your-msp-account/leaving-bc-permanently",
+      "state": "baseline_created",
+      "sha256": "27dac6e8fdc1445ba0e73beabf34f39789479acaf46c8787ba268a1dfdfb3638",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "msp.leave_permanent_outside_canada",
+          "quote_found": true
+        }
+      ]
+    },
+    {
+      "url": "https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/managing-your-msp-account/leaving-bc-temporarily",
+      "state": "baseline_created",
+      "sha256": "26ab9099a9ade0c92abb52d3520847a2ec96eed1324c9145af512e2524a56c9b",
+      "date_modified": null,
+      "baseline_sha256": null,
+      "missing_quotes": [],
+      "rules_without_quote": [],
+      "rules": [
+        {
+          "rule_id": "msp.extended_absence_conditions",
+          "quote_found": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "rule": "两个不同引擎的独立作答与题库答案不一致的题暂停出题；人工按 Discover Canada 原文复核、改题后才移出本表。",
+  "paused": []
+}

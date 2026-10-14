@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-14",
+  "purpose": "OAS 居住期证据整理清单。只按官方条文分组，告诉家庭每一组要证明什么、手上可能有什么；不是 Service Canada 承诺接受的封闭材料表，也不输出资格结论。",
+  "sources": {
+    "oasr-21": {
+      "url": "https://laws-lois.justice.gc.ca/eng/regulations/C.R.C.,_c._1246/FullText.html",
+      "label": "Old Age Security Regulations, C.R.C., c. 1246, s. 21（Justice Laws）",
+      "quotes": [
+        "a person resides in Canada if he makes his home and ordinarily lives in any part of Canada",
+        "a person is present in Canada when he is physically present in any part of Canada",
+        "of a temporary nature and does not exceed one year",
+        "for the purpose of attending a school or university",
+        "had in Canada a permanent place of abode to which he intended to return",
+        "maintained in Canada a self-contained domestic establishment"
+      ]
+    },
+    "sc-apply": {
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/apply.html",
+      "label": "Canada.ca · Apply for Old Age Security",
+      "quotes": [
+        "Information about where you have lived since age 18"
+      ]
+    }
+  },
+  "groups": [
+    {
+      "id": "history",
+      "title": "十八岁以后住过哪里",
+      "proves": "申请时要交代十八岁以后在哪里生活过，这是整份证据的骨架。",
+      "basis": ["sc-apply"],
+      "items": [
+        "按国家逐段写出十八岁以后通常居住的起止日，短期探亲、旅游另列，不混进居住段",
+        "每段注明当时的住址与法律身份（公民、PR、工签、学签或其他）"
+      ]
+    },
+    {
+      "id": "home",
+      "title": "家安在加拿大：住房",
+      "proves": "条例把“居住”定义为在加拿大安家并通常在此生活，住房是最直接的证据。",
+      "basis": ["oasr-21"],
+      "items": [
+        "租约、房产登记或按揭文件，覆盖各段居住期",
+        "寄到加拿大住址的水电、网络、房屋保险账单，按年各留几张即可"
+      ]
+    },
+    {
+      "id": "centre",
+      "title": "生活重心在加拿大：家庭、工作、学业与公共服务",
+      "proves": "“通常在此生活”看的是日子怎么过，而不只是人在不在境内。",
+      "basis": ["oasr-21"],
+      "items": [
+        "配偶、子女同住或在加就学的记录",
+        "在加工作的雇佣信、T4 或自雇报税记录",
+        "以加拿大居民身份报税的记录",
+        "省医保卡与就医记录、驾照、银行账户长期往来"
+      ]
+    },
+    {
+      "id": "presence",
+      "title": "人在加拿大的日子：出入境日期",
+      "proves": "条例把“在加拿大”（physically present）和“居住在加拿大”分成两个概念；出入境日期用来核对两者。",
+      "basis": ["oasr-21"],
+      "items": [
+        "护照出入境章、CBSA 出入境报告（报告按入境、出境分别申请，出境数据有起始年份限制）",
+        "机票行程单与登机记录，用来补 CBSA 没有记录的出境"
+      ]
+    },
+    {
+      "id": "temporary-absence",
+      "title": "离开过，但居住没有中断",
+      "proves": "条例第 21(4) 条：临时性质且不超过一年的离开、为上学离开、以及第 21(5) 条列明的情形，视为没有中断在加拿大的居住。主张这一点要拿出“家一直在加拿大”的证据。",
+      "basis": ["oasr-21"],
+      "items": [
+        "每段离境写明原因与预定返回日，并保留离境期间仍在付的加拿大租约或房贷、留在加拿大的家人与家当",
+        "为上学离开的，留学校录取与在读证明",
+        "受雇于加拿大公司或政府派驻海外的，留雇主证明，以及在加拿大保留住所、打算返回的证据（条例对这类情形还有返回时限等条件，要读原文）"
+      ]
+    }
+  ],
+  "not_covered": [
+    "外国社保协定的期间合并（totalization）另有规则，本清单不处理",
+    "超过一年、又不属于第 21(5) 条情形的离开，是否中断居住由 Service Canada 审查认定，本工具不下结论"
+  ]
+}

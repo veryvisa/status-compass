@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { questions } from '../src/lib/questions.mjs';
+import { allQuestions as questions } from '../src/lib/questions.mjs';
 import { crosscheckQuizAnswers, parseQuizAnswers } from '../src/lib/quiz-crosscheck.mjs';
 
 const args = process.argv.slice(2);
-const usage = '用法：node scripts/quiz-crosscheck.mjs [--out report.md] answer-1.tsv [answer-2.tsv ...]';
+const usage = '用法：node scripts/quiz-crosscheck.mjs [--out report.md] [--write-paused data/quiz-paused.json] answer-1.tsv [answer-2.tsv ...]';
 
 try {
   let output = null;
+  let pausedFile = null;
   const inputs = [];
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index];
@@ -17,6 +18,11 @@ try {
       if (output !== null) throw new Error('--out 只能指定一次');
       output = value;
       index += 1;
+    } else if (argument === '--write-paused') {
+      const value = args[index + 1];
+      if (!value || value.startsWith('--')) throw new Error('--write-paused 后必须提供暂停表路径');
+      pausedFile = value;
+      index += 1;
     } else if (argument.startsWith('--')) {
       throw new Error(`未知参数 ${argument}`);
     } else {
@@ -24,6 +30,7 @@ try {
     }
   }
   if (inputs.length === 0) throw new Error(`至少需要一个答案文件\n${usage}`);
+  if (pausedFile && inputs.length < 2) throw new Error('--write-paused 需要至少两份不同引擎的答案文件');
 
   const answerSets = inputs.map((file) => {
     const label = path.basename(file);
@@ -57,6 +64,18 @@ try {
     }
   }
   else process.stdout.write(markdown);
+  if (pausedFile) {
+    // 只增不减：已暂停的题要人工复核改题后才手动移出。
+    const current = fs.existsSync(pausedFile) ? JSON.parse(fs.readFileSync(pausedFile, 'utf8')) : { schema_version: 1, paused: [] };
+    const have = new Set(current.paused.map((item) => item.id));
+    const today = new Date().toISOString().slice(0, 10);
+    for (const item of report.disagreements) {
+      if (have.has(item.id)) continue;
+      current.paused.push({ id: item.id, since: today, reason: `独立作答不一致：题库 ${item.expected}；${item.submitted.map((answer) => `${answer.label} ${answer.answer}`).join('，')}` });
+    }
+    current.paused.sort((a, b) => a.id.localeCompare(b.id));
+    fs.writeFileSync(pausedFile, `${JSON.stringify(current, null, 2)}\n`);
+  }
 } catch (error) {
   console.error(`错误：${error instanceof Error ? error.message : '无法处理答案文件'}`);
   process.exitCode = 2;

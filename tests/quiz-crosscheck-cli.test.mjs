@@ -72,3 +72,21 @@ test('quiz crosscheck CLI rejects a missing --out value as rc 2', () => {
   assert.match(noInput.stderr, /^错误：至少需要一个答案文件/);
   assert.doesNotMatch(noInput.stderr, /\n\s+at\s/);
 });
+
+test('quiz crosscheck --write-paused records disagreements and never removes earlier pauses', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'quiz-paused-'));
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const [first, second] = questions;
+  const right = (question) => String.fromCharCode(65 + question.answer);
+  const other = (question) => right(question) === 'A' ? 'B' : 'A';
+  const one = write(directory, 'engine-a.tsv', `${first.id}\t${right(first)}\n${second.id}\t${right(second)}\n`);
+  const two = write(directory, 'engine-b.tsv', `${first.id}\t${other(first)}\n${second.id}\t${right(second)}\n`);
+  const paused = write(directory, 'paused.json', JSON.stringify({ schema_version: 1, paused: [{ id: 'old-q', since: '2026-01-01', reason: 'manual' }] }));
+  const result = run(['--out', path.join(directory, 'r.md'), '--write-paused', paused, one, two]);
+  assert.equal(result.status, 0, result.stderr);
+  const ids = JSON.parse(fs.readFileSync(paused, 'utf8')).paused.map((item) => item.id);
+  assert.deepEqual(ids, [first.id, 'old-q'].sort());
+  const single = run(['--write-paused', paused, one]);
+  assert.equal(single.status, 2);
+  assert.match(single.stderr, /至少两份/);
+});

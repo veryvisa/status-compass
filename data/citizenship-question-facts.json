@@ -12,9 +12,9 @@
   {"id":"who05","chapter":"我们是谁","question":"加拿大多元社会的一项基本期待是什么？","correct":"所有人遵守法律并共享公民责任","distractors":["不同群体可各自选择是否守法","新移民不能参与公共生活","只有出生在加拿大的人承担责任"],"statement":"多元文化不取消共同遵守法律和履行责任的要求。"},
 
   {"id":"hist01","chapter":"加拿大历史","question":"“Canada”这个名称通常源自哪个词？","correct":"易洛魁语 Kanata，意为村庄","distractors":["拉丁语的北方","法语的河流","英语的殖民地"],"statement":"Canada 一名通常追溯到 Kanata。"},
-  {"id":"hist02","chapter":"加拿大历史","question":"1867 年发生了什么？","correct":"加拿大联邦成立","distractors":["《权利与自由宪章》通过","纽芬兰加入联邦","加拿大采用枫叶旗"],"statement":"加拿大联邦成立于 1867 年。"},
+  {"id":"hist02","chapter":"加拿大历史","question":"1867 年发生了什么？","correct":"加拿大联邦成立","distractors":["《权利与自由宪章》通过","纽芬兰加入联邦","加拿大采用枫叶旗"],"statement":"加拿大联邦成立于 1867 年。","reverse_exclude":["hist04"]},
   {"id":"hist03","chapter":"加拿大历史","question":"首任加拿大总理是谁？","correct":"约翰·亚历山大·麦克唐纳爵士","distractors":["威尔弗里德·劳里埃爵士","莱斯特·皮尔逊","亚历山大·麦肯齐"],"statement":"约翰·亚历山大·麦克唐纳爵士是加拿大首任总理。"},
-  {"id":"hist04","chapter":"加拿大历史","question":"负责 1867 年联邦成立的宪制会议被称为什么进程的一部分？","correct":"邦联／联邦化（Confederation）","distractors":["大迁徙","西敏改革","寂静革命"],"statement":"Confederation 是理解加拿大建国的重要概念。"},
+  {"id":"hist04","chapter":"加拿大历史","question":"负责 1867 年联邦成立的宪制会议被称为什么进程的一部分？","correct":"邦联／联邦化（Confederation）","distractors":["大迁徙","西敏改革","寂静革命"],"statement":"Confederation 是理解加拿大建国的重要概念。","reverse_exclude":["hist02"]},
   {"id":"hist05","chapter":"加拿大历史","question":"纽芬兰与拉布拉多何时加入加拿大联邦？","correct":"1949 年","distractors":["1867 年","1871 年","1982 年"],"statement":"纽芬兰与拉布拉多在 1949 年加入联邦。"},
 
   {"id":"modern01","chapter":"现代加拿大","question":"加拿大在两次世界大战中的经历带来了什么重要变化？","correct":"扩大国际角色并强化独立国家认同","distractors":["结束所有对外关系","取消议会制度","把省政府改为殖民地"],"statement":"战争经历推动了加拿大国家认同与国际地位的发展。"},

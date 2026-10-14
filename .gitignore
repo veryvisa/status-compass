@@ -3,3 +3,4 @@ node_modules/
 dist/
 reports/theme-report.json
 *.log
+reports/*-latest.json

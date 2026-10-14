@@ -1,4 +1,5 @@
 import { rule, value } from './rules.mjs';
+import evidence from '../../data/oas-residence-evidence.json' with { type: 'json' };
 
 const DAY = 86400000;
 export const iso = (date) => new Date(date).toISOString().slice(0, 10);
@@ -128,19 +129,30 @@ export function healthMeasure(input) {
   };
 }
 
+// OAS 条例第 21(4)(a) 条：临时性质、不超过一年的离开不中断居住。这里只把“能否套用”所需的天数列出来，
+// 是否属于“临时性质”由证据决定，本工具不判。
+export const OAS_TEMPORARY_ABSENCE_MAX_DAYS = 365;
+
 export function oasMeasure(input) {
   const start = maxDate(input.canadaStart || input.temporaryStart || input.prDate, input.birthDate ? addYears(input.birthDate, 18) : input.canadaStart || input.prDate);
-  const days = presenceDays(start, input.asOf, input.trips);
+  const end = date(input.asOf);
+  const days = presenceDays(start, end, input.trips);
+  const span = daysInclusive(start, end);
+  const absences = normalizeTrips(input.trips).map((trip) => {
+    const from = maxDate(addDays(trip.departure, 1), start);
+    const to = minDate(trip.return ? addDays(trip.return, -1) : end, end);
+    const absentDays = to >= from ? daysInclusive(from, to) : 0;
+    const totalAbsentDays = trip.return ? Math.max(0, Math.round((trip.return - trip.departure) / DAY) - 1) : Math.max(0, Math.round((end - trip.departure) / DAY));
+    return { departure: iso(trip.departure), return: trip.return ? iso(trip.return) : null, absentDays, totalAbsentDays, withinOneYear: Boolean(trip.return) && totalAbsentDays <= OAS_TEMPORARY_ABSENCE_MAX_DAYS };
+  }).filter((item) => item.absentDays > 0);
+  const longAbsences = absences.filter((item) => !item.withinOneYear);
   return {
-    days, periodStart: iso(start), periodEnd: iso(input.asOf), estimateOnly: true,
-    evidenceChecklist: [
-      '列出十八岁后在每个国家通常居住的起止日，不把短期访问当成居住',
-      '护照、CBSA 记录、机票与旧证件，用来复核出入境日期',
-      '住房与生活重心材料，如租约、房产、水电账单及省级证件',
-      '家庭、工作、就学、税务和医疗联系，用来说明当时生活中心',
-      '公民、归化、护照、登陆纸、PR 卡或临时居民许可等法律身份文件',
-      '若主张境外期间仍可计入，另整理境外就业、学业、陪同关系及在加永久住所证明'
-    ]
+    days, periodStart: iso(start), periodEnd: iso(end), estimateOnly: true,
+    residenceIfShortAbsencesTemporary: span - longAbsences.reduce((sum, item) => sum + item.absentDays, 0),
+    absences, longAbsences,
+    evidenceGroups: evidence.groups.map(({ id, title, proves, items }) => ({ id, title, proves, items })),
+    evidenceChecklist: evidence.groups.flatMap((group) => group.items),
+    evidenceSources: Object.values(evidence.sources).map(({ url, label }) => ({ url, label }))
   };
 }
 
